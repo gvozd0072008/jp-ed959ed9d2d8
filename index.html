@@ -1124,7 +1124,10 @@ function renderDashboard(main) {
 // HELPERS
 // ============================================================
 function formatAnswer(text) {
-  text = text.replace(/(https?:\/\/[^\s<,;)"""]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--accent2);word-break:break-all">$1</a>');
+  // URLs with protocol
+  text = text.replace(/(https?:\/\/[^\s<,;)"""']+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--accent2);word-break:break-all">$1</a>');
+  // Domains without protocol (word.word.tld/path patterns, not inside href already)
+  text = text.replace(/(?<!href="|>)((?:[a-zA-Z0-9-]+\.)+(?:com|org|net|io|ru|dev|academy|app|edu|info|guide|sh)(?:\/[^\s<,;)"""']*)?)/g, '<a href="https://$1" target="_blank" rel="noopener" style="color:var(--accent2);word-break:break-all">$1</a>');
   return text.replace(/\n/g, '<br>');
 }
 function esc(s) { return s.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
