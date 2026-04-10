@@ -444,6 +444,125 @@ input { font:inherit; color:inherit; }
   font-size:14px; line-height:1.7; color:var(--text2);
 }
 
+/* SRS Review overlay */
+.srs-overlay {
+  position:fixed; inset:0; background:var(--bg);
+  z-index:1002; display:none; flex-direction:column;
+}
+.srs-overlay.active { display:flex; }
+.srs-body { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:20px; display:flex; flex-direction:column; align-items:center; }
+.srs-due-badge {
+  display:inline-flex; align-items:center; justify-content:center;
+  background:var(--red); color:#fff; border-radius:50%; width:20px; height:20px;
+  font-size:11px; font-weight:700; margin-left:6px;
+}
+
+/* Interview simulation */
+.interview-overlay {
+  position:fixed; inset:0; background:var(--bg);
+  z-index:1003; display:none; flex-direction:column;
+}
+.interview-overlay.active { display:flex; }
+.interview-timer-bar { height:4px; background:var(--bg3); }
+.interview-timer-fill { height:100%; background:var(--accent); transition:width 1s linear; }
+.interview-body { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:20px; max-width:800px; margin:0 auto; width:100%; }
+.interview-section { margin-bottom:24px; padding:20px; background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius); }
+.interview-section h3 { margin-bottom:12px; }
+.interview-textarea {
+  width:100%; min-height:100px; padding:12px; border:1px solid var(--bg3);
+  border-radius:8px; background:var(--bg); color:var(--text); font:inherit;
+  font-size:14px; line-height:1.6; resize:vertical;
+}
+
+/* Bookmark button */
+.bookmark-btn {
+  font-size:16px; padding:4px; cursor:pointer; transition:all 0.15s;
+  background:none; border:none; color:var(--text2);
+}
+.bookmark-btn.active { color:var(--yellow); }
+.bookmark-btn:hover { transform:scale(1.2); }
+
+/* Notes */
+.note-area {
+  margin-top:8px; padding:10px 16px; border-top:1px solid var(--bg3);
+}
+.note-input {
+  width:100%; padding:8px 12px; border:1px solid var(--bg3);
+  border-radius:8px; background:var(--bg); color:var(--text);
+  font:inherit; font-size:12px; resize:vertical; min-height:40px;
+}
+.note-saved { font-size:11px; color:var(--green); margin-top:4px; }
+
+/* Dashboard cards enhanced */
+.dash-card {
+  background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius);
+  padding:16px; margin-bottom:12px;
+}
+.dash-card h3 { font-size:15px; margin-bottom:10px; }
+.dash-streak-big { font-size:36px; font-weight:700; color:var(--orange); text-align:center; }
+.dash-streak-label { text-align:center; color:var(--text2); font-size:13px; }
+.weak-topic-item {
+  display:flex; align-items:center; gap:10px; padding:8px 0;
+  border-bottom:1px solid var(--bg3); font-size:14px;
+}
+.weak-topic-bar { flex:1; height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; }
+.weak-topic-fill { height:100%; border-radius:3px; }
+.recommendation-item {
+  padding:10px 14px; margin-bottom:6px; background:var(--bg3);
+  border-radius:8px; font-size:13px; cursor:pointer; transition:all 0.15s;
+}
+.recommendation-item:hover { background:var(--bg4); }
+
+/* Activity heatmap */
+.heatmap { display:flex; gap:2px; flex-wrap:wrap; margin-top:8px; }
+.heatmap-cell {
+  width:14px; height:14px; border-radius:2px; background:var(--bg3);
+}
+.heatmap-cell.l1 { background:rgba(0,184,148,0.3); }
+.heatmap-cell.l2 { background:rgba(0,184,148,0.5); }
+.heatmap-cell.l3 { background:rgba(0,184,148,0.7); }
+.heatmap-cell.l4 { background:var(--green); }
+
+/* Code sandbox */
+.sandbox-overlay {
+  position:fixed; inset:0; background:var(--bg);
+  z-index:1004; display:none; flex-direction:column;
+}
+.sandbox-overlay.active { display:flex; }
+.sandbox-editor {
+  width:100%; flex:1; padding:16px; border:none;
+  background:var(--bg2); color:var(--text);
+  font-family:'JetBrains Mono','Fira Code',Consolas,monospace;
+  font-size:14px; line-height:1.6; resize:none; outline:none;
+  tab-size:4;
+}
+.sandbox-reference {
+  padding:16px; border-top:1px solid var(--bg3);
+  max-height:40vh; overflow-y:auto; font-size:13px;
+  line-height:1.6; color:var(--text2);
+}
+.sandbox-ref-code {
+  background:var(--bg); border:1px solid var(--bg3); border-radius:8px;
+  padding:12px; margin:8px 0; font-family:'JetBrains Mono',Consolas,monospace;
+  font-size:12px; line-height:1.5; white-space:pre-wrap; overflow-x:auto;
+}
+
+/* Share */
+.share-modal {
+  position:fixed; inset:0; background:rgba(0,0,0,0.6);
+  display:none; align-items:center; justify-content:center; z-index:2000;
+}
+.share-modal.active { display:flex; }
+.share-content {
+  background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius);
+  padding:24px; max-width:400px; width:90%; text-align:center;
+}
+.share-text {
+  width:100%; padding:12px; border:1px solid var(--bg3); border-radius:8px;
+  background:var(--bg); color:var(--text); font:inherit; font-size:13px;
+  text-align:center; margin:12px 0;
+}
+
 /* Filter pills */
 .filter-row {
   display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap;
@@ -594,6 +713,13 @@ input { font:inherit; color:inherit; }
   .test-results { padding:20px 14px; }
   .test-results-score .big-num { font-size:36px; }
   .test-progress-dots { padding:6px 14px; }
+
+  /* New features mobile */
+  .srs-overlay,.interview-overlay,.sandbox-overlay { padding-top:env(safe-area-inset-top); }
+  .interview-body { padding:14px; }
+  .sandbox-editor { font-size:12px; padding:12px; }
+  .heatmap-cell { width:11px; height:11px; }
+  .dash-streak-big { font-size:28px; }
 }
 
 /* Animations */
@@ -639,6 +765,58 @@ input { font:inherit; color:inherit; }
       <button class="qr-learning" onclick="rateQuiz('learning')">Частично</button>
       <button class="qr-known" onclick="rateQuiz('known')">Знаю!</button>
     </div>
+  </div>
+</div>
+
+<div class="srs-overlay" id="srsOverlay">
+  <div class="test-header">
+    <div class="test-header-left">
+      <button style="font-size:24px" onclick="closeSRS()">&#8592;</button>
+      <span style="font-weight:600" id="srsTitle">&#128257; Повторение</span>
+    </div>
+    <div class="test-header-right">
+      <span id="srsProgress"></span>
+    </div>
+  </div>
+  <div class="srs-body" id="srsBody"></div>
+</div>
+
+<div class="interview-overlay" id="interviewOverlay">
+  <div class="test-header">
+    <div class="test-header-left">
+      <button style="font-size:24px" onclick="closeInterview()">&#8592;</button>
+      <span style="font-weight:600" id="interviewTitle">&#127908; Собеседование</span>
+    </div>
+    <div class="test-header-right">
+      <span class="test-timer" id="interviewTimer"></span>
+      <span id="interviewProgress"></span>
+    </div>
+  </div>
+  <div class="interview-timer-bar"><div class="interview-timer-fill" id="interviewTimerBar"></div></div>
+  <div class="interview-body" id="interviewBody"></div>
+</div>
+
+<div class="sandbox-overlay" id="sandboxOverlay">
+  <div class="test-header">
+    <div class="test-header-left">
+      <button style="font-size:24px" onclick="closeSandbox()">&#8592;</button>
+      <span style="font-weight:600" id="sandboxTitle">&#128187; Код</span>
+    </div>
+    <div class="test-header-right">
+      <button class="topbar-btn" onclick="toggleSandboxRef()" style="font-size:12px">&#128161; Подсказка</button>
+      <button class="topbar-btn" onclick="clearSandbox()" style="font-size:12px">&#128465; Очистить</button>
+    </div>
+  </div>
+  <textarea class="sandbox-editor" id="sandboxEditor" placeholder="// Напишите ваше решение здесь..." spellcheck="false"></textarea>
+  <div class="sandbox-reference" id="sandboxRef" style="display:none"></div>
+</div>
+
+<div class="share-modal" id="shareModal" onclick="closeShareModal(event)">
+  <div class="share-content" onclick="event.stopPropagation()">
+    <h3 style="margin-bottom:8px">&#128227; Поделиться результатом</h3>
+    <textarea class="share-text" id="shareText" rows="4" readonly></textarea>
+    <button class="test-start-btn" onclick="copyShare()" style="margin-top:8px">&#128203; Скопировать</button>
+    <button class="topbar-btn" onclick="closeShareModal()" style="width:100%;justify-content:center;margin-top:8px">Закрыть</button>
   </div>
 </div>
 
@@ -1404,13 +1582,22 @@ const QUIZ_BANK = [
 // STATE
 // ============================================================
 const STORAGE_KEY = 'java-prep-2026';
+const SRS_KEY = 'java-prep-srs';
+const ACTIVITY_KEY = 'java-prep-activity';
+const BOOKMARKS_KEY = 'java-prep-bookmarks';
+const NOTES_KEY = 'java-prep-notes';
 let state = loadState();
+let srsData = loadSRS();
+let activityData = loadActivity();
+let bookmarksData = loadBookmarks();
+let notesData = loadNotes();
 let currentTopic = state.lastTopic || 'core';
 let searchQuery = '';
 let filterStatus = 'all';
 let filterLevel = 0;
 let quizQueue = [];
 let quizIndex = 0;
+let sessionStartTime = Date.now();
 
 function loadState() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {statuses:{},lastTopic:'core'}; }
@@ -1427,6 +1614,211 @@ function setStatus(topicId, q, status) {
   if (status === 'new') delete state.statuses[key];
   else state.statuses[key] = status;
   saveState();
+  trackActivity();
+  // SRS: schedule review on rate
+  if (status === 'known' || status === 'learning' || status === 'hard') {
+    srsSchedule(key, status === 'known' ? 5 : status === 'learning' ? 3 : 1);
+  }
+}
+
+// ============================================================
+// SRS (Spaced Repetition - simplified SM-2)
+// ============================================================
+function loadSRS() {
+  try { return JSON.parse(localStorage.getItem(SRS_KEY)) || {}; } catch { return {}; }
+}
+function saveSRS() { localStorage.setItem(SRS_KEY, JSON.stringify(srsData)); }
+
+function srsSchedule(key, quality) {
+  // quality: 1-5 (1=hard, 3=learning, 5=known)
+  var card = srsData[key] || {interval:0, repetition:0, ef:2.5, nextReview:0};
+  if (quality < 3) {
+    card.repetition = 0;
+    card.interval = 1;
+  } else {
+    if (card.repetition === 0) card.interval = 1;
+    else if (card.repetition === 1) card.interval = 3;
+    else card.interval = Math.round(card.interval * card.ef);
+    card.repetition++;
+  }
+  card.ef = Math.max(1.3, card.ef + 0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+  card.nextReview = Date.now() + card.interval * 86400000;
+  card.lastReview = Date.now();
+  srsData[key] = card;
+  saveSRS();
+}
+
+function getDueCards() {
+  var now = Date.now();
+  var due = [];
+  Object.keys(srsData).forEach(function(key) {
+    if (srsData[key].nextReview <= now) {
+      var parts = key.split('::');
+      var topicId = parts[0];
+      var qText = parts.slice(1).join('::');
+      var topic = TOPICS.find(function(t){return t.id===topicId;});
+      if (topic) {
+        var item = topic.data.find(function(d){return d.q===qText;});
+        if (item) due.push({key:key, topicId:topicId, topicName:topic.name, item:item, card:srsData[key]});
+      }
+    }
+  });
+  due.sort(function(a,b){return a.card.nextReview - b.card.nextReview;});
+  return due;
+}
+
+// ============================================================
+// ACTIVITY TRACKING (daily streak, time)
+// ============================================================
+function loadActivity() {
+  try { return JSON.parse(localStorage.getItem(ACTIVITY_KEY)) || {days:{},streak:0,bestStreak:0}; }
+  catch { return {days:{},streak:0,bestStreak:0}; }
+}
+function saveActivity() { localStorage.setItem(ACTIVITY_KEY, JSON.stringify(activityData)); }
+
+function todayKey() { return new Date().toISOString().slice(0,10); }
+
+function trackActivity() {
+  var today = todayKey();
+  if (!activityData.days[today]) {
+    activityData.days[today] = {questions:0, minutes:0, started: Date.now()};
+  }
+  activityData.days[today].questions++;
+  updateStreak();
+  saveActivity();
+}
+
+function trackStudyTime() {
+  var today = todayKey();
+  if (!activityData.days[today]) {
+    activityData.days[today] = {questions:0, minutes:0, started: Date.now()};
+  }
+  var elapsed = Math.round((Date.now() - sessionStartTime) / 60000);
+  activityData.days[today].minutes = Math.max(activityData.days[today].minutes, elapsed);
+  saveActivity();
+}
+
+function updateStreak() {
+  var days = Object.keys(activityData.days).sort();
+  if (days.length === 0) { activityData.streak = 0; return; }
+  var streak = 1;
+  var today = todayKey();
+  // check from today backwards
+  var d = new Date(today);
+  if (!activityData.days[today]) {
+    d.setDate(d.getDate() - 1);
+    if (!activityData.days[d.toISOString().slice(0,10)]) { activityData.streak = 0; return; }
+  }
+  var check = new Date(d);
+  while (true) {
+    check.setDate(check.getDate() - 1);
+    var k = check.toISOString().slice(0,10);
+    if (activityData.days[k]) streak++;
+    else break;
+  }
+  activityData.streak = streak;
+  if (streak > (activityData.bestStreak || 0)) activityData.bestStreak = streak;
+}
+
+// ============================================================
+// BOOKMARKS
+// ============================================================
+function loadBookmarks() {
+  try { return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || {}; } catch { return {}; }
+}
+function saveBookmarks() { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarksData)); }
+function toggleBookmark(key) {
+  if (bookmarksData[key]) delete bookmarksData[key];
+  else bookmarksData[key] = Date.now();
+  saveBookmarks();
+  renderMain();
+}
+function isBookmarked(key) { return !!bookmarksData[key]; }
+
+// ============================================================
+// NOTES
+// ============================================================
+function loadNotes() {
+  try { return JSON.parse(localStorage.getItem(NOTES_KEY)) || {}; } catch { return {}; }
+}
+function saveNotes() { localStorage.setItem(NOTES_KEY, JSON.stringify(notesData)); }
+function saveNote(key, text) {
+  if (text.trim()) notesData[key] = text.trim();
+  else delete notesData[key];
+  saveNotes();
+}
+function getNote(key) { return notesData[key] || ''; }
+
+// ============================================================
+// TOPIC DEPENDENCIES
+// ============================================================
+const TOPIC_DEPS = {
+  'spring': ['core','patterns'],
+  'jpa': ['sql','spring'],
+  'kafka': ['threads','arch'],
+  'arch': ['patterns','spring'],
+  'streams': ['collections','core'],
+  'threads': ['core'],
+  'collections': ['core'],
+  'security': ['spring','protocols'],
+  'test': ['spring','core'],
+  'devops': ['spring'],
+  'patterns': ['core'],
+  'nosql': ['sql'],
+  'kotlin': ['core']
+};
+
+function getRelatedTopics(topicId) {
+  var related = [];
+  // topics this depends on
+  if (TOPIC_DEPS[topicId]) TOPIC_DEPS[topicId].forEach(function(t){ if (related.indexOf(t)===-1) related.push(t); });
+  // topics that depend on this
+  Object.keys(TOPIC_DEPS).forEach(function(k) {
+    if (TOPIC_DEPS[k].indexOf(topicId) !== -1 && related.indexOf(k) === -1) related.push(k);
+  });
+  return related;
+}
+
+// ============================================================
+// WEAK TOPICS ANALYSIS
+// ============================================================
+function getWeakTopics() {
+  var testData = JSON.parse(localStorage.getItem("java-prep-tests") || '{"history":[]}');
+  var topicScores = {};
+  // From test history
+  testData.history.forEach(function(h) {
+    if (h.errors && h.errors.length > 0) {
+      h.errors.forEach(function(errId) {
+        var q = QUIZ_BANK.find(function(qb){return qb.id===errId;});
+        if (q) {
+          if (!topicScores[q.topic]) topicScores[q.topic] = {correct:0, total:0};
+          topicScores[q.topic].total++;
+        }
+      });
+    }
+  });
+  testData.history.forEach(function(h) {
+    if (h.topics) {
+      // count total per topic from tests
+    }
+  });
+  // From card statuses
+  TOPICS.forEach(function(t) {
+    var stats = getTopicStats(t);
+    if (stats.total > 0) {
+      if (!topicScores[t.id]) topicScores[t.id] = {correct:0, total:0};
+      topicScores[t.id].correct += stats.known;
+      topicScores[t.id].total += stats.total;
+    }
+  });
+  // Sort by weakness (lowest known %)
+  var weak = Object.keys(topicScores).map(function(tid) {
+    var s = topicScores[tid];
+    var topicObj = TOPICS.find(function(t){return t.id===tid;});
+    return {id:tid, name: topicObj ? topicObj.name : tid, pct: s.total > 0 ? Math.round(s.correct/s.total*100) : 0, total: s.total};
+  });
+  weak.sort(function(a,b){return a.pct - b.pct;});
+  return weak.filter(function(w){return w.total >= 2;});
 }
 
 // ============================================================
@@ -1463,6 +1855,13 @@ function renderSidebar() {
     <span class="nav-icon">&#128200;</span>Dashboard</button>`;
   html += `<button class="nav-item" onclick="openTestSetup()">
     <span class="nav-icon">&#128221;</span>Тест</button>`;
+  var dueCount = getDueCards().length;
+  html += `<button class="nav-item" onclick="openSRS()">
+    <span class="nav-icon">&#128257;</span>Повторение${dueCount > 0 ? '<span class="srs-due-badge">'+dueCount+'</span>' : ''}</button>`;
+  html += `<button class="nav-item" onclick="openInterviewSetup()">
+    <span class="nav-icon">&#127908;</span>Собеседование</button>`;
+  html += `<button class="nav-item ${currentTopic==='bookmarks'?'active':''}" onclick="navigate('bookmarks')">
+    <span class="nav-icon">&#128278;</span>Закладки</button>`;
   TOPICS.forEach(t => {
     const s = getTopicStats(t);
     const pct = s.total ? Math.round((s.known/s.total)*100) : 0;
@@ -1483,7 +1882,9 @@ function renderSidebar() {
 
 function renderMain() {
   const main = document.getElementById('main');
+  trackStudyTime();
   if (currentTopic === 'dashboard') { renderDashboard(main); return; }
+  if (currentTopic === 'bookmarks') { renderBookmarks(main); return; }
   const topic = TOPICS.find(t => t.id === currentTopic);
   if (!topic) return;
 
@@ -1534,9 +1935,15 @@ function renderCard(topicId, item, idx, st) {
   const stClass = st !== 'new' ? `status-${st}` : '';
   const hotBadge = item.hot ? '<span class="badge badge-hot">&#128293; HOT</span>' : '';
   const lvlBadge = item.lvl ? '<span class="badge badge-l'+item.lvl+'">L'+item.lvl+'</span>' : '';
+  const qKey = getQKey(topicId, item.q);
+  const bm = isBookmarked(qKey);
+  const note = getNote(qKey);
+  const srsCard = srsData[qKey];
+  const srsInfo = srsCard ? ` <span class="badge" style="background:rgba(108,92,231,0.12);color:var(--accent2)" title="Следующее повторение">\u23F0 ${new Date(srsCard.nextReview).toLocaleDateString("ru")}</span>` : '';
   return `<div class="card ${stClass}" id="card-${topicId}-${idx}">
     <div class="card-q" onclick="toggleCard('${topicId}',${idx})">
-      <span class="card-q-text">${item.q} ${lvlBadge} ${hotBadge}</span>
+      <span class="card-q-text">${item.q} ${lvlBadge} ${hotBadge}${srsInfo}</span>
+      <button class="bookmark-btn ${bm?'active':''}" onclick="event.stopPropagation();toggleBookmark('${esc(qKey)}')" title="Закладка">${bm?'\u2605':'\u2606'}</button>
       <span class="card-arrow">&#9654;</span>
     </div>
     <div class="card-a">
@@ -1546,68 +1953,167 @@ function renderCard(topicId, item, idx, st) {
         <button class="status-btn btn-learning ${st==='learning'?'selected':''}" onclick="rate('${topicId}','${esc(item.q)}','learning')">&#128992; Частично</button>
         <button class="status-btn btn-known ${st==='known'?'selected':''}" onclick="rate('${topicId}','${esc(item.q)}','known')">&#128994; Знаю</button>
       </div>
+      ${(topicId === 'live' || topicId === 'algo') ? '<div style="padding:8px 16px;border-top:1px solid var(--bg3)"><button class="topbar-btn" style="width:100%;justify-content:center" onclick="openSandbox(\''+esc(item.q)+'\',\''+esc(item.a||'')+'\')">&#128187; Открыть редактор кода</button></div>' : ''}
+      <div class="note-area">
+        <textarea class="note-input" placeholder="Ваша заметка..." onblur="saveNote('${esc(qKey)}',this.value)">${note.replace(/</g,'&lt;')}</textarea>
+      </div>
     </div>
   </div>`;
+}
+
+function renderBookmarks(main) {
+  var html = '<h2 style="margin-bottom:20px">&#128278; Закладки</h2>';
+  var keys = Object.keys(bookmarksData);
+  if (keys.length === 0) {
+    html += '<div class="empty-state"><div class="icon">&#128278;</div><p>Нет закладок. Нажмите &#9734; на вопросе.</p></div>';
+  } else {
+    keys.forEach(function(key) {
+      var parts = key.split('::');
+      var topicId = parts[0];
+      var qText = parts.slice(1).join('::');
+      var topic = TOPICS.find(function(t){return t.id===topicId;});
+      if (!topic) return;
+      var item = topic.data.find(function(d){return d.q===qText;});
+      if (!item) return;
+      var st = getStatus(topicId, item.q);
+      var idx = topic.data.indexOf(item);
+      html += renderCard(topicId, item, 'bm-'+idx, st);
+    });
+  }
+  main.innerHTML = html;
 }
 
 function renderDashboard(main) {
   const all = getAllStats();
   const pctKnown = all.total ? Math.round(all.known/all.total*100) : 0;
-  let html = `<h2 style="margin-bottom:20px">Dashboard</h2>`;
-  html += `<div class="stats">
-    <div class="stat-card"><div class="stat-num accent">${all.total}</div><div class="stat-label">Всего вопросов</div></div>
-    <div class="stat-card"><div class="stat-num green">${all.known}</div><div class="stat-label">Знаю</div></div>
-    <div class="stat-card"><div class="stat-num yellow">${all.learning}</div><div class="stat-label">Частично</div></div>
-    <div class="stat-card"><div class="stat-num red">${all.hard}</div><div class="stat-label">Не знаю</div></div>
-  </div>`;
-  html += `<div class="progress-bar" style="height:10px;margin-bottom:8px"><div class="seg-green" style="width:${all.total?(all.known/all.total*100):0}%"></div><div class="seg-yellow" style="width:${all.total?(all.learning/all.total*100):0}%"></div></div>`;
-  html += `<p style="text-align:center;color:var(--text2);margin-bottom:24px">Общий прогресс: <b style="color:var(--green)">${pctKnown}%</b></p>`;
+  let html = '<h2 style="margin-bottom:20px">Dashboard</h2>';
 
-  html += `<div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap">
-    <button class="topbar-btn" onclick="startQuiz()" style="flex:1">&#127922; Quiz по всем</button>
-    <button class="topbar-btn" onclick="startQuiz('hard')" style="flex:1">&#128293; Повторить сложные</button>
-    <button class="topbar-btn" onclick="startQuiz('new')" style="flex:1">&#10024; Изучить новые</button>
-  </div>`;
+  // Daily streak + SRS due
+  var dueCount = getDueCards().length;
+  updateStreak();
+  html += '<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">';
+  html += '<div class="dash-card" style="flex:1;min-width:140px;text-align:center">';
+  html += '<div class="dash-streak-big">' + (activityData.streak || 0) + '</div>';
+  html += '<div class="dash-streak-label">\uD83D\uDD25 дней подряд</div>';
+  if (activityData.bestStreak > 0) html += '<div style="font-size:11px;color:var(--text2);margin-top:4px">Рекорд: ' + activityData.bestStreak + '</div>';
+  html += '</div>';
+  html += '<div class="dash-card" style="flex:1;min-width:140px;text-align:center;cursor:pointer" onclick="openSRS()">';
+  html += '<div class="dash-streak-big" style="color:var(--accent2)">' + dueCount + '</div>';
+  html += '<div class="dash-streak-label">\u23F0 к повторению</div>';
+  if (dueCount > 0) html += '<div style="font-size:11px;color:var(--accent2);margin-top:4px">Нажмите для повторения</div>';
+  html += '</div>';
+  var todayAct = activityData.days[todayKey()];
+  html += '<div class="dash-card" style="flex:1;min-width:140px;text-align:center">';
+  html += '<div class="dash-streak-big" style="color:var(--blue)">' + (todayAct ? todayAct.questions : 0) + '</div>';
+  html += '<div class="dash-streak-label">вопросов сегодня</div>';
+  if (todayAct && todayAct.minutes > 0) html += '<div style="font-size:11px;color:var(--text2);margin-top:4px">\u23F1 ' + todayAct.minutes + ' мин</div>';
+  html += '</div>';
+  html += '</div>';
 
-  // Test stats section
+  // Stats
+  html += '<div class="stats">';
+  html += '<div class="stat-card"><div class="stat-num accent">' + all.total + '</div><div class="stat-label">Всего вопросов</div></div>';
+  html += '<div class="stat-card"><div class="stat-num green">' + all.known + '</div><div class="stat-label">Знаю</div></div>';
+  html += '<div class="stat-card"><div class="stat-num yellow">' + all.learning + '</div><div class="stat-label">Частично</div></div>';
+  html += '<div class="stat-card"><div class="stat-num red">' + all.hard + '</div><div class="stat-label">Не знаю</div></div>';
+  html += '</div>';
+  html += '<div class="progress-bar" style="height:10px;margin-bottom:8px"><div class="seg-green" style="width:' + (all.total?(all.known/all.total*100):0) + '%"></div><div class="seg-yellow" style="width:' + (all.total?(all.learning/all.total*100):0) + '%"></div></div>';
+  html += '<p style="text-align:center;color:var(--text2);margin-bottom:24px">Общий прогресс: <b style="color:var(--green)">' + pctKnown + '%</b></p>';
+
+  // Quick actions
+  html += '<div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap">';
+  html += '<button class="topbar-btn" onclick="startQuiz()" style="flex:1">&#127922; Quiz</button>';
+  html += '<button class="topbar-btn" onclick="openTestSetup()" style="flex:1">&#128221; Тест</button>';
+  html += '<button class="topbar-btn" onclick="openSRS()" style="flex:1">&#128257; Повторение</button>';
+  html += '<button class="topbar-btn" onclick="openInterviewSetup()" style="flex:1">&#127908; Собеседование</button>';
+  html += '</div>';
+
+  // Activity heatmap (last 30 days)
+  html += '<div class="dash-card"><h3>&#128197; Активность (30 дней)</h3>';
+  html += '<div class="heatmap">';
+  for (var i = 29; i >= 0; i--) {
+    var d = new Date(); d.setDate(d.getDate() - i);
+    var dk = d.toISOString().slice(0,10);
+    var act = activityData.days[dk];
+    var q = act ? act.questions : 0;
+    var lvl = q === 0 ? '' : q < 5 ? 'l1' : q < 15 ? 'l2' : q < 30 ? 'l3' : 'l4';
+    html += '<div class="heatmap-cell ' + lvl + '" title="' + dk + ': ' + q + ' вопросов"></div>';
+  }
+  html += '</div></div>';
+
+  // Weak topics & recommendations
+  var weak = getWeakTopics();
+  if (weak.length > 0) {
+    html += '<div class="dash-card"><h3>&#9888;&#65039; Слабые темы</h3>';
+    weak.slice(0, 5).forEach(function(w) {
+      var color = w.pct < 30 ? 'var(--red)' : w.pct < 60 ? 'var(--yellow)' : 'var(--green)';
+      html += '<div class="weak-topic-item"><span style="min-width:110px">' + w.name + '</span>';
+      html += '<div class="weak-topic-bar"><div class="weak-topic-fill" style="width:' + w.pct + '%;background:' + color + '"></div></div>';
+      html += '<span style="min-width:40px;text-align:right;color:' + color + '">' + w.pct + '%</span></div>';
+    });
+    // Recommendations
+    html += '<h3 style="margin-top:16px">&#128161; Рекомендации</h3>';
+    weak.slice(0, 3).forEach(function(w) {
+      var related = getRelatedTopics(w.id);
+      var relatedNames = related.map(function(r) {
+        var t = TOPICS.find(function(tt){return tt.id===r;});
+        return t ? t.name : r;
+      });
+      html += '<div class="recommendation-item" onclick="navigate(\'' + w.id + '\')">';
+      html += '\u27A1 Подтяните <b>' + w.name + '</b> (' + w.pct + '%)';
+      if (relatedNames.length > 0) html += '<br><span style="color:var(--text2);font-size:12px">Связано с: ' + relatedNames.join(', ') + '</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // Test history
   var testData = JSON.parse(localStorage.getItem("java-prep-tests") || '{"history":[],"bestStreak":0,"totalTests":0,"totalCorrect":0,"totalAnswered":0}');
   if (testData.totalTests > 0) {
     var avgPct = testData.totalAnswered > 0 ? Math.round(testData.totalCorrect / testData.totalAnswered * 100) : 0;
-    html += `<h3 style="margin-bottom:12px">&#128221; Тесты</h3>`;
-    html += `<div class="stats" style="margin-bottom:16px">
-      <div class="stat-card"><div class="stat-num accent">${testData.totalTests}</div><div class="stat-label">Тестов пройдено</div></div>
-      <div class="stat-card"><div class="stat-num green">${avgPct}%</div><div class="stat-label">Средний результат</div></div>
-      <div class="stat-card"><div class="stat-num" style="color:var(--orange)">${testData.bestStreak}</div><div class="stat-label">Лучший streak</div></div>
-    </div>`;
-    // Last 10 tests mini chart
+    html += '<div class="dash-card"><h3>&#128221; Тесты</h3>';
+    html += '<div class="stats" style="margin-bottom:12px">';
+    html += '<div class="stat-card"><div class="stat-num accent">' + testData.totalTests + '</div><div class="stat-label">Пройдено</div></div>';
+    html += '<div class="stat-card"><div class="stat-num green">' + avgPct + '%</div><div class="stat-label">Среднее</div></div>';
+    html += '<div class="stat-card"><div class="stat-num" style="color:var(--orange)">' + testData.bestStreak + '</div><div class="stat-label">Streak</div></div>';
+    html += '</div>';
     var last10 = testData.history.slice(-10);
     if (last10.length > 1) {
-      html += `<div style="background:var(--bg2);border:1px solid var(--bg3);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px">`;
-      html += `<div style="font-size:13px;color:var(--text2);margin-bottom:8px">Прогресс (последние ${last10.length} тестов)</div>`;
-      html += `<div style="display:flex;align-items:flex-end;gap:4px;height:60px">`;
+      html += '<div style="font-size:13px;color:var(--text2);margin-bottom:8px">Прогресс</div>';
+      html += '<div style="display:flex;align-items:flex-end;gap:4px;height:60px">';
       last10.forEach(function(h) {
         var p = h.total > 0 ? Math.round(h.correct / h.total * 100) : 0;
         var color = p >= 70 ? 'var(--green)' : p >= 50 ? 'var(--yellow)' : 'var(--red)';
-        html += '<div style="flex:1;background:'+color+';border-radius:3px 3px 0 0;min-height:4px;height:'+Math.max(p,5)+'%" title="'+p+'%"></div>';
+        html += '<div style="flex:1;background:' + color + ';border-radius:3px 3px 0 0;min-height:4px;height:' + Math.max(p,5) + '%" title="' + p + '%"></div>';
       });
-      html += `</div></div>`;
+      html += '</div>';
     }
+    html += '</div>';
   }
-  html += `<div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap">
-    <button class="topbar-btn" onclick="openTestSetup()" style="flex:1">&#128221; Пройти тест</button>
-  </div>`;
 
-  html += `<h3 style="margin-bottom:12px">По темам</h3>`;
+  // Time stats
+  var totalMinutes = 0;
+  Object.keys(activityData.days).forEach(function(k) { totalMinutes += activityData.days[k].minutes || 0; });
+  if (totalMinutes > 0) {
+    html += '<div class="dash-card"><h3>\u23F1 Время обучения</h3>';
+    html += '<p style="font-size:14px;color:var(--text2)">Всего: <b style="color:var(--text)">' + Math.round(totalMinutes / 60) + 'ч ' + (totalMinutes % 60) + 'мин</b></p>';
+    html += '</div>';
+  }
+
+  // Topics
+  html += '<h3 style="margin-bottom:12px">По темам</h3>';
   TOPICS.forEach(t => {
     const s = getTopicStats(t);
     const pct = s.total ? Math.round(s.known/s.total*100) : 0;
-    html += `<div style="background:var(--bg2);border:1px solid var(--bg3);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;cursor:pointer" onclick="navigate('${t.id}')">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <span>${t.icon} <b>${t.name}</b></span>
-        <span style="color:var(--text2);font-size:13px">${s.known}/${s.total} (${pct}%)</span>
-      </div>
-      <div class="progress-bar" style="margin:0;height:4px"><div class="seg-green" style="width:${s.total?(s.known/s.total*100):0}%"></div><div class="seg-yellow" style="width:${s.total?(s.learning/s.total*100):0}%"></div></div>
-    </div>`;
+    var deps = getRelatedTopics(t.id);
+    var depHtml = deps.length > 0 ? '<div style="font-size:11px;color:var(--text2);margin-top:4px">Связи: ' + deps.map(function(d){ var tt=TOPICS.find(function(x){return x.id===d;}); return tt?tt.name:d; }).join(', ') + '</div>' : '';
+    html += '<div style="background:var(--bg2);border:1px solid var(--bg3);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;cursor:pointer" onclick="navigate(\'' + t.id + '\')">';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">';
+    html += '<span>' + t.icon + ' <b>' + t.name + '</b></span>';
+    html += '<span style="color:var(--text2);font-size:13px">' + s.known + '/' + s.total + ' (' + pct + '%)</span>';
+    html += '</div>';
+    html += '<div class="progress-bar" style="margin:0;height:4px"><div class="seg-green" style="width:' + (s.total?(s.known/s.total*100):0) + '%"></div><div class="seg-yellow" style="width:' + (s.total?(s.learning/s.total*100):0) + '%"></div></div>';
+    html += depHtml + '</div>';
   });
   main.innerHTML = html;
 }
@@ -2111,6 +2617,7 @@ function showTestResults() {
   html += '<div class="test-results-actions">';
   if (errors.length > 0) html += '<button onclick="showTestReview('+errors[0].idx+')">\uD83D\uDCD6 Разбор ошибок</button>';
   html += '<button onclick="retryTest()">\uD83D\uDD04 Пройти ещё раз</button>';
+  html += '<button onclick="shareTestResult()">&#128227; Поделиться</button>';
   html += '<button class="btn-primary" onclick="closeTest()">\uD83C\uDFE0 На главную</button>';
   html += '</div></div>';
 
@@ -2244,6 +2751,443 @@ function setupTestSwipe() {
 }
 
 // ============================================================
+// SRS REVIEW MODE
+// ============================================================
+var srsQueue = [];
+var srsIndex = 0;
+
+function openSRS() {
+  srsQueue = getDueCards();
+  if (srsQueue.length === 0) {
+    alert("Нет карточек для повторения! Все повторения актуальны.");
+    return;
+  }
+  srsIndex = 0;
+  document.getElementById("srsOverlay").classList.add("active");
+  closeSidebar();
+  renderSRSCard();
+}
+
+function closeSRS() {
+  document.getElementById("srsOverlay").classList.remove("active");
+  renderSidebar();
+  renderMain();
+}
+
+function renderSRSCard() {
+  if (srsIndex >= srsQueue.length) {
+    var body = document.getElementById("srsBody");
+    body.innerHTML = '<div style="text-align:center;padding:40px"><div style="font-size:48px;margin-bottom:16px">&#127881;</div><h2>Повторение завершено!</h2><p style="color:var(--text2);margin:12px 0">Вы повторили ' + srsQueue.length + ' карточек</p><button class="test-start-btn" onclick="closeSRS()" style="max-width:300px;margin:20px auto">&#127968; На главную</button></div>';
+    return;
+  }
+  var entry = srsQueue[srsIndex];
+  document.getElementById("srsProgress").textContent = (srsIndex + 1) + " / " + srsQueue.length;
+  document.getElementById("srsTitle").innerHTML = "&#128257; Повторение";
+
+  var html = '<div style="max-width:700px;width:100%;margin:0 auto">';
+  html += '<div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center">';
+  html += '<span class="badge badge-l' + (entry.item.lvl||1) + '">L' + (entry.item.lvl||1) + '</span>';
+  html += '<span class="badge" style="background:rgba(108,92,231,0.15);color:var(--accent2)">' + entry.topicName + '</span>';
+  var daysAgo = Math.round((Date.now() - entry.card.lastReview) / 86400000);
+  html += '<span class="badge" style="background:rgba(253,203,110,0.15);color:var(--yellow)">Последний раз: ' + (daysAgo === 0 ? 'сегодня' : daysAgo + ' дн. назад') + '</span>';
+  html += '</div>';
+  html += '<div class="test-q-text">' + entry.item.q + '</div>';
+  html += '<div class="quiz-answer" id="srsAnswer" style="display:none;max-width:700px;text-align:left;font-size:14px;line-height:1.7;color:var(--text2);margin:16px 0">' + formatAnswer(entry.item.a || '') + '</div>';
+  html += '<button class="quiz-reveal-btn" id="srsRevealBtn" onclick="revealSRSAnswer()" style="margin-bottom:16px">Показать ответ</button>';
+  html += '<div id="srsRate" style="display:none;display:flex;gap:10px;width:100%;max-width:400px;margin:0 auto;display:none">';
+  html += '<button class="topbar-btn" style="flex:1;justify-content:center;color:var(--red)" onclick="rateSRS(1)">&#128308; Не знаю</button>';
+  html += '<button class="topbar-btn" style="flex:1;justify-content:center;color:var(--yellow)" onclick="rateSRS(3)">&#128992; Частично</button>';
+  html += '<button class="topbar-btn" style="flex:1;justify-content:center;color:var(--green)" onclick="rateSRS(5)">&#128994; Знаю!</button>';
+  html += '</div>';
+  html += '</div>';
+
+  document.getElementById("srsBody").innerHTML = html;
+}
+
+function revealSRSAnswer() {
+  document.getElementById("srsAnswer").style.display = "block";
+  document.getElementById("srsRevealBtn").style.display = "none";
+  document.getElementById("srsRate").style.display = "flex";
+}
+
+function rateSRS(quality) {
+  var entry = srsQueue[srsIndex];
+  srsSchedule(entry.key, quality);
+  // Also update flashcard status
+  var parts = entry.key.split('::');
+  var status = quality >= 5 ? 'known' : quality >= 3 ? 'learning' : 'hard';
+  state.statuses[entry.key] = status;
+  saveState();
+  srsIndex++;
+  renderSRSCard();
+}
+
+// ============================================================
+// INTERVIEW SIMULATION
+// ============================================================
+var interviewState = null;
+
+function openInterviewSetup() {
+  document.getElementById("interviewOverlay").classList.add("active");
+  closeSidebar();
+  document.getElementById("interviewTimer").textContent = "";
+  document.getElementById("interviewTimerBar").style.width = "0%";
+  document.getElementById("interviewProgress").textContent = "";
+
+  var html = '<div class="test-setup">';
+  html += '<h2>&#127908; Симуляция собеседования</h2>';
+  html += '<p style="color:var(--text2);margin-bottom:20px">Микс из открытых вопросов, тестов и задач. Как на настоящем собесе!</p>';
+  html += '<div class="test-setup-section"><label>Длительность</label><div class="test-chips" id="interviewDuration">';
+  html += '<button class="test-chip active" data-dur="30" onclick="toggleInterviewChip(this)">30 мин</button>';
+  html += '<button class="test-chip" data-dur="45" onclick="toggleInterviewChip(this)">45 мин</button>';
+  html += '<button class="test-chip" data-dur="60" onclick="toggleInterviewChip(this)">60 мин</button>';
+  html += '</div></div>';
+  html += '<div class="test-setup-section"><label>Уровень</label><div class="test-chips" id="interviewLevel">';
+  html += '<button class="test-chip active" data-lvl="0" onclick="toggleInterviewLvl(this)">Middle</button>';
+  html += '<button class="test-chip" data-lvl="1" onclick="toggleInterviewLvl(this)">Senior</button>';
+  html += '</div></div>';
+  html += '<button class="test-start-btn" onclick="startInterview()">&#127908; Начать собеседование</button>';
+  html += '</div>';
+  document.getElementById("interviewBody").innerHTML = html;
+}
+
+function toggleInterviewChip(btn) {
+  document.querySelectorAll("#interviewDuration .test-chip").forEach(function(c){c.classList.remove("active");});
+  btn.classList.add("active");
+}
+function toggleInterviewLvl(btn) {
+  document.querySelectorAll("#interviewLevel .test-chip").forEach(function(c){c.classList.remove("active");});
+  btn.classList.add("active");
+}
+
+function startInterview() {
+  var durEl = document.querySelector("#interviewDuration .test-chip.active");
+  var dur = durEl ? parseInt(durEl.getAttribute("data-dur")) : 30;
+  var lvlEl = document.querySelector("#interviewLevel .test-chip.active");
+  var senior = lvlEl && lvlEl.getAttribute("data-lvl") === "1";
+
+  // Build interview sections
+  var sections = [];
+
+  // 1. Open questions (5-8)
+  var openTopics = ['core','spring','sql','threads','arch'];
+  var openQs = [];
+  openTopics.forEach(function(tid) {
+    var topic = TOPICS.find(function(t){return t.id===tid;});
+    if (topic) {
+      topic.data.forEach(function(d) {
+        if (d.s || !d.a) return;
+        if (senior && d.lvl && d.lvl < 2) return;
+        if (!senior && d.lvl && d.lvl > 2) return;
+        openQs.push({item:d, topicId:tid, topicName:topic.name});
+      });
+    }
+  });
+  shuffle(openQs);
+  var numOpen = dur >= 45 ? 8 : 5;
+  openQs = openQs.slice(0, numOpen);
+
+  // 2. Test questions (5-10)
+  var testPool = QUIZ_BANK.filter(function(q) {
+    if (senior && q.lvl < 2) return false;
+    if (!senior && q.lvl > 2) return false;
+    return true;
+  });
+  shuffle(testPool);
+  var numTest = dur >= 45 ? 10 : 5;
+  testPool = testPool.slice(0, numTest);
+
+  // 3. Code tasks (1-2)
+  var codeTopic = TOPICS.find(function(t){return t.id==='live';});
+  var codeTasks = [];
+  if (codeTopic) {
+    codeTopic.data.forEach(function(d) {
+      if (d.s || !d.a) return;
+      codeTasks.push(d);
+    });
+  }
+  shuffle(codeTasks);
+  codeTasks = codeTasks.slice(0, dur >= 45 ? 2 : 1);
+
+  interviewState = {
+    duration: dur * 60,
+    startTime: Date.now(),
+    interval: null,
+    openQs: openQs,
+    testQs: testPool,
+    codeTasks: codeTasks,
+    testAnswers: new Array(testPool.length).fill(null),
+    openAnswers: new Array(openQs.length).fill(""),
+    codeAnswers: new Array(codeTasks.length).fill(""),
+    senior: senior,
+    finished: false
+  };
+
+  // Start timer
+  interviewState.interval = setInterval(updateInterviewTimer, 1000);
+  renderInterview();
+}
+
+function shuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+}
+
+function updateInterviewTimer() {
+  if (!interviewState) return;
+  var elapsed = Math.round((Date.now() - interviewState.startTime) / 1000);
+  var remaining = interviewState.duration - elapsed;
+  if (remaining <= 0) { finishInterview(); return; }
+  var m = Math.floor(remaining / 60);
+  var s = remaining % 60;
+  document.getElementById("interviewTimer").textContent = "\u23F1 " + m + ":" + (s < 10 ? "0" : "") + s;
+  document.getElementById("interviewTimer").className = "test-timer" + (remaining <= 60 ? " warning" : "");
+  document.getElementById("interviewTimerBar").style.width = (elapsed / interviewState.duration * 100) + "%";
+}
+
+function renderInterview() {
+  if (!interviewState) return;
+  document.getElementById("interviewTitle").innerHTML = "&#127908; Собеседование" + (interviewState.senior ? " (Senior)" : " (Middle)");
+  var sec = 0;
+  var html = '';
+
+  // Section 1: Open questions
+  html += '<h2 style="margin-bottom:16px">&#128172; Теоретические вопросы</h2>';
+  html += '<p style="color:var(--text2);margin-bottom:16px;font-size:13px">Ответьте своими словами, как на настоящем собеседовании</p>';
+  interviewState.openQs.forEach(function(oq, i) {
+    html += '<div class="interview-section">';
+    html += '<h3><span class="badge badge-l' + (oq.item.lvl||1) + '">L' + (oq.item.lvl||1) + '</span> ' + oq.topicName + '</h3>';
+    html += '<p style="font-size:15px;font-weight:500;margin:8px 0">' + oq.item.q + '</p>';
+    html += '<textarea class="interview-textarea" placeholder="Ваш ответ..." onblur="interviewState.openAnswers[' + i + ']=this.value">' + interviewState.openAnswers[i] + '</textarea>';
+    html += '</div>';
+  });
+
+  // Section 2: Tests
+  html += '<h2 style="margin:24px 0 16px">&#128221; Тестовые вопросы</h2>';
+  interviewState.testQs.forEach(function(tq, i) {
+    html += '<div class="interview-section">';
+    html += '<h3><span class="badge badge-l' + tq.lvl + '">L' + tq.lvl + '</span> ' + tq.q + '</h3>';
+    if (tq.code) html += '<div class="test-q-code">' + escHtml(tq.code) + '</div>';
+    html += '<div class="test-options">';
+    var curAns = interviewState.testAnswers[i];
+    tq.options.forEach(function(opt, oi) {
+      var sel = curAns && curAns.indexOf(oi) !== -1;
+      html += '<div class="test-option' + (tq.type==="multi"?" multi":"") + (sel?" selected":"") + '" onclick="selectInterviewOption(' + i + ',' + oi + ')">';
+      html += '<span class="indicator"></span><span>' + escHtml(opt) + '</span></div>';
+    });
+    html += '</div></div>';
+  });
+
+  // Section 3: Code
+  if (interviewState.codeTasks.length > 0) {
+    html += '<h2 style="margin:24px 0 16px">&#128187; Задачи на код</h2>';
+    interviewState.codeTasks.forEach(function(ct, i) {
+      html += '<div class="interview-section">';
+      html += '<h3>' + ct.q + '</h3>';
+      html += '<textarea class="interview-textarea" style="font-family:monospace;min-height:150px" placeholder="// Ваш код..." onblur="interviewState.codeAnswers[' + i + ']=this.value">' + interviewState.codeAnswers[i] + '</textarea>';
+      html += '</div>';
+    });
+  }
+
+  html += '<div style="margin-top:24px;text-align:center"><button class="test-start-btn" style="max-width:400px" onclick="finishInterview()">&#10003; Завершить собеседование</button></div>';
+
+  document.getElementById("interviewBody").innerHTML = html;
+}
+
+function selectInterviewOption(qIdx, optIdx) {
+  if (!interviewState || interviewState.finished) return;
+  var tq = interviewState.testQs[qIdx];
+  var ans = interviewState.testAnswers[qIdx] || [];
+  ans = ans.slice();
+  if (tq.type === "single") { ans = [optIdx]; }
+  else { var p = ans.indexOf(optIdx); if (p !== -1) ans.splice(p,1); else ans.push(optIdx); }
+  interviewState.testAnswers[qIdx] = ans;
+  // Update just this question options visually
+  var sections = document.querySelectorAll(".interview-section");
+  var testStart = interviewState.openQs.length;
+  var section = sections[testStart + qIdx];
+  if (section) {
+    section.querySelectorAll(".test-option").forEach(function(el, oi) {
+      el.classList.toggle("selected", ans.indexOf(oi) !== -1);
+    });
+  }
+}
+
+function finishInterview() {
+  if (!interviewState) return;
+  if (interviewState.interval) { clearInterval(interviewState.interval); interviewState.interval = null; }
+  interviewState.finished = true;
+
+  var elapsed = Math.round((Date.now() - interviewState.startTime) / 1000);
+  document.getElementById("interviewTimer").textContent = "";
+  document.getElementById("interviewTimerBar").style.width = "100%";
+
+  // Score tests
+  var testCorrect = 0;
+  interviewState.testQs.forEach(function(tq, i) {
+    var ans = interviewState.testAnswers[i] || [];
+    if (ans.length > 0 && ans.length === tq.correct.length) {
+      var s1 = ans.slice().sort(), s2 = tq.correct.slice().sort();
+      var ok = true;
+      for (var j = 0; j < s1.length; j++) { if (s1[j] !== s2[j]) ok = false; }
+      if (ok) testCorrect++;
+    }
+  });
+
+  // Count open answered
+  var openAnswered = interviewState.openAnswers.filter(function(a){return a.trim().length > 10;}).length;
+  var codeAnswered = interviewState.codeAnswers.filter(function(a){return a.trim().length > 10;}).length;
+
+  var testPct = interviewState.testQs.length > 0 ? Math.round(testCorrect / interviewState.testQs.length * 100) : 0;
+  var openPct = interviewState.openQs.length > 0 ? Math.round(openAnswered / interviewState.openQs.length * 100) : 0;
+  var codePct = interviewState.codeTasks.length > 0 ? Math.round(codeAnswered / interviewState.codeTasks.length * 100) : 0;
+  var overallPct = Math.round((testPct * 0.4 + openPct * 0.4 + codePct * 0.2));
+  var ready = overallPct >= 70;
+
+  var html = '<div class="test-results">';
+  html += '<div class="test-results-score">';
+  html += '<div style="font-size:48px;margin-bottom:8px">' + (ready ? '&#9989;' : '&#128170;') + '</div>';
+  html += '<div class="verdict" style="color:' + (ready ? 'var(--green)' : 'var(--yellow)') + '">' + (ready ? 'Готов к собеседованию!' : 'Нужно подтянуть!') + '</div>';
+  html += '</div>';
+
+  html += '<div class="test-results-meta">';
+  html += '<span>\u23F1 ' + Math.floor(elapsed/60) + ':' + (elapsed%60<10?'0':'') + elapsed%60 + '</span>';
+  html += '</div>';
+
+  html += '<div class="test-results-topics" style="margin-top:20px">';
+  html += '<div class="test-results-topic"><span style="min-width:140px">&#128221; Тесты</span><div class="topic-bar"><div class="topic-bar-fill" style="width:' + testPct + '%"></div></div><span style="min-width:80px;text-align:right">' + testCorrect + '/' + interviewState.testQs.length + ' ' + testPct + '%</span></div>';
+  html += '<div class="test-results-topic"><span style="min-width:140px">&#128172; Теория</span><div class="topic-bar"><div class="topic-bar-fill" style="width:' + openPct + '%"></div></div><span style="min-width:80px;text-align:right">' + openAnswered + '/' + interviewState.openQs.length + ' ' + openPct + '%</span></div>';
+  html += '<div class="test-results-topic"><span style="min-width:140px">&#128187; Код</span><div class="topic-bar"><div class="topic-bar-fill" style="width:' + codePct + '%"></div></div><span style="min-width:80px;text-align:right">' + codeAnswered + '/' + interviewState.codeTasks.length + ' ' + codePct + '%</span></div>';
+  html += '</div>';
+
+  // Show test answers review
+  html += '<h3 style="margin:20px 0 12px">Разбор тестов</h3>';
+  interviewState.testQs.forEach(function(tq, i) {
+    var ans = interviewState.testAnswers[i] || [];
+    var isCorr = ans.length > 0 && ans.length === tq.correct.length;
+    if (isCorr) { var s1=ans.slice().sort(),s2=tq.correct.slice().sort(); for(var j=0;j<s1.length;j++){if(s1[j]!==s2[j])isCorr=false;} }
+    html += '<div class="interview-section" style="border-left:3px solid ' + (isCorr ? 'var(--green)' : 'var(--red)') + '">';
+    html += '<p style="font-weight:500">' + (isCorr ? '\u2705' : '\u274C') + ' ' + tq.q + '</p>';
+    if (!isCorr && tq.explanation) html += '<p style="color:var(--text2);font-size:13px;margin-top:8px">' + tq.explanation + '</p>';
+    html += '</div>';
+  });
+
+  // Show reference answers for open questions
+  html += '<h3 style="margin:20px 0 12px">Эталонные ответы</h3>';
+  interviewState.openQs.forEach(function(oq, i) {
+    html += '<div class="interview-section">';
+    html += '<p style="font-weight:500">' + oq.item.q + '</p>';
+    if (interviewState.openAnswers[i].trim()) {
+      html += '<p style="color:var(--text2);font-size:13px;margin:8px 0"><b>Ваш ответ:</b> ' + interviewState.openAnswers[i].substring(0, 200) + (interviewState.openAnswers[i].length > 200 ? '...' : '') + '</p>';
+    }
+    html += '<details style="margin-top:8px"><summary style="cursor:pointer;color:var(--accent2);font-size:13px">Показать эталон</summary><div style="color:var(--text2);font-size:13px;margin-top:8px;line-height:1.6">' + formatAnswer(oq.item.a) + '</div></details>';
+    html += '</div>';
+  });
+
+  html += '<div class="test-results-actions" style="margin-top:20px">';
+  html += '<button onclick="shareInterviewResult(' + overallPct + ',' + (interviewState.senior?1:0) + ')">&#128227; Поделиться</button>';
+  html += '<button onclick="openInterviewSetup()">&#128260; Ещё раз</button>';
+  html += '<button class="btn-primary" onclick="closeInterview()">&#127968; На главную</button>';
+  html += '</div></div>';
+
+  document.getElementById("interviewBody").innerHTML = html;
+  document.getElementById("interviewBody").scrollTop = 0;
+}
+
+function closeInterview() {
+  if (interviewState && interviewState.interval) clearInterval(interviewState.interval);
+  interviewState = null;
+  document.getElementById("interviewOverlay").classList.remove("active");
+  renderSidebar();
+  renderMain();
+}
+
+// ============================================================
+// CODE SANDBOX
+// ============================================================
+var sandboxTask = null;
+
+function openSandbox(taskQ, taskA) {
+  sandboxTask = {q: taskQ, a: taskA || ''};
+  document.getElementById("sandboxOverlay").classList.add("active");
+  document.getElementById("sandboxTitle").textContent = "\uD83D\uDCBB " + taskQ.substring(0, 40) + (taskQ.length > 40 ? "..." : "");
+  document.getElementById("sandboxEditor").value = "";
+  document.getElementById("sandboxRef").style.display = "none";
+  document.getElementById("sandboxRef").innerHTML = '<b>Эталонное решение:</b><div class="sandbox-ref-code">' + formatAnswer(taskA) + '</div>';
+
+  // Tab key support
+  var editor = document.getElementById("sandboxEditor");
+  editor.onkeydown = function(e) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      var start = this.selectionStart;
+      this.value = this.value.substring(0, start) + "    " + this.value.substring(this.selectionEnd);
+      this.selectionStart = this.selectionEnd = start + 4;
+    }
+  };
+}
+
+function closeSandbox() {
+  document.getElementById("sandboxOverlay").classList.remove("active");
+  sandboxTask = null;
+}
+
+function toggleSandboxRef() {
+  var ref = document.getElementById("sandboxRef");
+  ref.style.display = ref.style.display === "none" ? "block" : "none";
+}
+
+function clearSandbox() {
+  if (confirm("Очистить код?")) document.getElementById("sandboxEditor").value = "";
+}
+
+// ============================================================
+// SHARE
+// ============================================================
+function shareTestResult() {
+  if (!testState) return;
+  var pct = testState.cachedAnswered > 0 ? Math.round(testState.cachedCorrect / testState.cachedAnswered * 100) : 0;
+  var text = "\uD83C\uDFAF Java Interview Prep\n";
+  text += "Результат теста: " + testState.cachedCorrect + "/" + testState.cachedAnswered + " (" + pct + "%)\n";
+  text += "\uD83D\uDD25 Лучший streak: " + testState.bestStreak + "\n";
+  text += "\u23F1 Время: " + formatTime(testState.elapsed) + "\n";
+  text += "java-prep.app";
+  showShareModal(text);
+}
+
+function shareInterviewResult(pct, senior) {
+  var text = "\uD83C\uDFA4 Java Interview Prep\n";
+  text += "Симуляция собеседования (" + (senior ? "Senior" : "Middle") + ")\n";
+  text += "Результат: " + pct + "%\n";
+  text += (pct >= 70 ? "\u2705 Готов!" : "\uD83D\uDCAA В процессе подготовки") + "\n";
+  text += "java-prep.app";
+  showShareModal(text);
+}
+
+function showShareModal(text) {
+  document.getElementById("shareText").value = text;
+  document.getElementById("shareModal").classList.add("active");
+}
+
+function closeShareModal(e) {
+  if (!e || e.target === document.getElementById("shareModal")) {
+    document.getElementById("shareModal").classList.remove("active");
+  }
+}
+
+function copyShare() {
+  var el = document.getElementById("shareText");
+  el.select();
+  document.execCommand("copy");
+  if (navigator.clipboard) navigator.clipboard.writeText(el.value);
+  var btn = el.parentElement.querySelector(".test-start-btn");
+  btn.textContent = "\u2705 Скопировано!";
+  setTimeout(function(){ btn.textContent = "\uD83D\uDCCB Скопировать"; }, 2000);
+}
+
+// ============================================================
 // THEME & MOBILE
 // ============================================================
 function toggleTheme() {
@@ -2315,11 +3259,28 @@ function importProgress() {
 
 // Keyboard
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('shareModal').classList.contains('active')) { closeShareModal(); return; }
+    if (document.getElementById('sandboxOverlay').classList.contains('active')) { closeSandbox(); return; }
+    if (document.getElementById('interviewOverlay').classList.contains('active')) { closeInterview(); return; }
+    if (document.getElementById('srsOverlay').classList.contains('active')) { closeSRS(); return; }
+  }
   // Test mode keys
   if (document.getElementById('testOverlay').classList.contains('active')) {
     if (e.key === 'Escape') closeTest();
     if (e.key === 'ArrowLeft') testPrev();
     if (e.key === 'ArrowRight') testNext();
+    return;
+  }
+  // SRS: space to reveal, 1-2-3 to rate
+  if (document.getElementById('srsOverlay').classList.contains('active')) {
+    if (e.key === ' ') { e.preventDefault(); var rb = document.getElementById('srsRevealBtn'); if (rb && rb.style.display !== 'none') revealSRSAnswer(); }
+    var sr = document.getElementById('srsRate');
+    if (sr && sr.style.display === 'flex') {
+      if (e.key === '1') rateSRS(1);
+      if (e.key === '2') rateSRS(3);
+      if (e.key === '3') rateSRS(5);
+    }
     return;
   }
   if (e.key === 'Escape') closeQuiz();
