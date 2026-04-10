@@ -980,11 +980,11 @@ const TOPICS = [
     {q:'Basic Auth, Session, Token — сравнение',a:'<b>Basic Auth:</b> логин:пароль в Base64 в каждом запросе. Просто, но небезопасно без HTTPS.\n<b>Session:</b> сервер хранит состояние (HttpSession), клиент — cookie (JSESSIONID). Stateful.\n<b>Token (JWT):</b> сервер НЕ хранит состояние. Токен содержит всё. Stateless.\n\nМикросервисы: Token (JWT) — stateless, масштабируемый.\nМонолит: Session — проще, нативная поддержка.',lvl:1},
     {q:'OAuth 2.0 — протокол авторизации',a:'Делегирование доступа без передачи пароля.\n\n<b>Роли:</b> Resource Owner, Client, Authorization Server, Resource Server.\n\n<b>Grant Types:</b>\n• <b>Authorization Code</b> — для web-приложений (самый безопасный)\n• <b>Client Credentials</b> — machine-to-machine (M2M)\n• <b>PKCE</b> — для SPA и mobile (расширение Auth Code)\n• Resource Owner Password — deprecated\n\n<b>Tokens:</b> Access Token (короткоживущий) + Refresh Token (обновление).\n\nSpring: spring-boot-starter-oauth2-resource-server, spring-boot-starter-oauth2-client.',lvl:2,hot:1},
     {q:'JWT — структура и валидация',a:'JSON Web Token: <b>Header.Payload.Signature</b> (Base64URL)\n\n<b>Header:</b> {"alg":"RS256","typ":"JWT"}\n<b>Payload:</b> {"sub":"user1","iss":"auth-server","exp":1234567890,"roles":["ADMIN"]}\n<b>Signature:</b> HMAC-SHA256(header+payload, secret) или RSA/EC\n\n<b>Валидация:</b>\n1. Проверить подпись (HMAC/RSA)\n2. Проверить exp (не истёк)\n3. Проверить iss (правильный издатель)\n4. Проверить aud (для нас ли токен)\n\nНе хранить чувствительные данные в payload — он НЕ зашифрован!',lvl:2,hot:1},
-    {q:'RBAC vs ABAC',a:'<b>RBAC</b> (Role-Based Access Control):\nПрава привязаны к ролям: ADMIN, USER, MANAGER.\nПросто, подходит для большинства приложений.\n@PreAuthorize("hasRole('ADMIN')")\n\n<b>ABAC</b> (Attribute-Based Access Control):\nПрава на основе атрибутов: кто, что, где, когда.\nГибче, но сложнее. Пример: "менеджер может видеть платежи только своего отдела".\n\nДля платёжных систем: RBAC + дополнительные проверки в коде.',lvl:2},
+    {q:'RBAC vs ABAC',a:'<b>RBAC</b> (Role-Based Access Control):\nПрава привязаны к ролям: ADMIN, USER, MANAGER.\nПросто, подходит для большинства приложений.\n@PreAuthorize("hasRole(\'ADMIN\')")\n\n<b>ABAC</b> (Attribute-Based Access Control):\nПрава на основе атрибутов: кто, что, где, когда.\nГибче, но сложнее. Пример: "менеджер может видеть платежи только своего отдела".\n\nДля платёжных систем: RBAC + дополнительные проверки в коде.',lvl:2},
     {s:'Spring Security'},
     {q:'Spring Security — архитектура',a:'<b>Security Filter Chain</b> — цепочка фильтров перед контроллером:\n\n1. SecurityContextPersistenceFilter — загрузка SecurityContext\n2. UsernamePasswordAuthenticationFilter — логин/пароль\n3. BearerTokenAuthenticationFilter — JWT\n4. AuthorizationFilter — проверка прав\n5. ExceptionTranslationFilter — обработка ошибок\n\n<b>Ключевые компоненты:</b>\n• SecurityContextHolder — хранит Authentication (ThreadLocal)\n• AuthenticationManager → AuthenticationProvider → UserDetailsService\n• GrantedAuthority — роль/permission',lvl:2,hot:1},
     {q:'Spring Security — конфигурация (Spring Boot 3)',a:'<pre><code>@Configuration\n@EnableWebSecurity\npublic class SecurityConfig {\n    @Bean\n    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(auth -> auth\n                .requestMatchers("/api/public/**").permitAll()\n                .requestMatchers("/api/admin/**").hasRole("ADMIN")\n                .anyRequest().authenticated())\n            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))\n            .csrf(csrf -> csrf.disable())\n            .sessionManagement(s -> s.sessionCreationPolicy(STATELESS))\n            .build();\n    }\n}</code></pre>',lvl:2,hot:1},
-    {q:'@PreAuthorize, @Secured, @RolesAllowed',a:'Method-level security (нужен @EnableMethodSecurity):\n\n<pre><code>@PreAuthorize("hasRole('ADMIN') and #id == authentication.principal.id")\npublic Payment getPayment(Long id) { ... }\n\n@PreAuthorize("hasAuthority('PAYMENT_READ')")\npublic List<Payment> getAll() { ... }\n\n@Secured("ROLE_ADMIN") // проще, только роли\npublic void delete(Long id) { ... }</code></pre>\n\n@PreAuthorize — самый гибкий, поддерживает SpEL.',lvl:2},
+    {q:'@PreAuthorize, @Secured, @RolesAllowed',a:'Method-level security (нужен @EnableMethodSecurity):\n\n<pre><code>@PreAuthorize("hasRole(\'ADMIN\') and #id == authentication.principal.id")\npublic Payment getPayment(Long id) { ... }\n\n@PreAuthorize("hasAuthority(\'PAYMENT_READ\')")\npublic List<Payment> getAll() { ... }\n\n@Secured("ROLE_ADMIN") // проще, только роли\npublic void delete(Long id) { ... }</code></pre>\n\n@PreAuthorize — самый гибкий, поддерживает SpEL.',lvl:2},
     {q:'CSRF и CORS',a:'<b>CSRF</b> (Cross-Site Request Forgery):\nАтака: вредоносный сайт отправляет запрос от имени пользователя.\nЗащита: CSRF token в cookie/header.\nОтключают для stateless REST API (JWT, без cookies).\n\n<b>CORS</b> (Cross-Origin Resource Sharing):\nБраузер блокирует запросы к другому домену.\n\n<pre><code>@Bean\nCorsConfigurationSource corsConfig() {\n    var config = new CorsConfiguration();\n    config.setAllowedOrigins(List.of("https://pay.raif.ru"));\n    config.setAllowedMethods(List.of("GET","POST","PUT","DELETE"));\n    var source = new UrlBasedCorsConfigurationSource();\n    source.registerCorsConfiguration("/api/**", config);\n    return source;\n}</code></pre>',lvl:2},
     {s:'Криптография'},
     {q:'Симметричное vs асимметричное шифрование',a:'<b>Симметричное</b> (AES, DES):\nОдин ключ для шифрования и дешифрования.\nБыстрое. Проблема: как передать ключ?\n\n<b>Асимметричное</b> (RSA, EC):\nПара ключей: public (шифрование) + private (дешифрование).\nМедленнее, но безопасная передача ключей.\n\n<b>TLS/HTTPS:</b> комбинация обоих:\n1. Asymmetric — обмен ключами (handshake)\n2. Symmetric — шифрование данных (AES)',lvl:2},
@@ -1221,19 +1221,18 @@ function renderDashboard(main) {
 // HELPERS
 // ============================================================
 function formatAnswer(text) {
-  const linkStyle = 'color:var(--accent2);word-break:break-all;text-decoration:underline';
-  // URLs with protocol
-  text = text.replace(/(https?:\/\/[^\s<,;"""']+)/g, (m) => {
-    const clean = m.replace(/[)]+$/, '');
-    const trail = m.slice(clean.length);
-    return `<a href="${clean}" target="_blank" rel="noopener" style="${linkStyle}">${clean}</a>${trail}`;
+  var ls = 'color:var(--accent2);word-break:break-all;text-decoration:underline';
+  text = text.replace(/(https?:\/\/[^\s<,;"']+)/g, function(m) {
+    var c = m.replace(/[)]+$/, ''), t = m.slice(c.length);
+    return '<a href="'+c+'" target="_blank" style="'+ls+'">'+c+'</a>'+t;
   });
-  // Domains without protocol
-  text = text.replace(/(?<![/"a-z])((?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:com|org|net|io|ru|dev|academy|app|edu|info|guide|sh)(?:\/[^\s<,;"""']*)?)/g, (m) => {
-    if (m.includes('</a>')) return m;
-    const clean = m.replace(/[)]+$/, '');
-    const trail = m.slice(clean.length);
-    return `<a href="https://${clean}" target="_blank" rel="noopener" style="${linkStyle}">${clean}</a>${trail}`;
+  text = text.replace(/((?:[a-zA-Z0-9][a-zA-Z0-9-]*\.)+(?:com|org|net|io|ru|dev|academy|app|edu|info|guide|sh)(?:\/[^\s<,;"']*)?)/g, function(m, g, off, str) {
+    if (off > 0 && str[off-1] === '/') return m;
+    if (off > 0 && str[off-1] === '"') return m;
+    if (off > 0 && str[off-1] === '>') return m;
+    if (m.indexOf('</a>') >= 0) return m;
+    var c = m.replace(/[)]+$/, ''), t = m.slice(c.length);
+    return '<a href="https://'+c+'" target="_blank" style="'+ls+'">'+c+'</a>'+t;
   });
   return text.replace(/\n/g, '<br>');
 }
