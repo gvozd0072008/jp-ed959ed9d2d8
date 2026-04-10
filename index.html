@@ -1124,6 +1124,7 @@ function renderDashboard(main) {
 // HELPERS
 // ============================================================
 function formatAnswer(text) {
+  text = text.replace(/(https?:\/\/[^\s<,;)"""]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--accent2);word-break:break-all">$1</a>');
   return text.replace(/\n/g, '<br>');
 }
 function esc(s) { return s.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
