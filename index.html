@@ -564,6 +564,50 @@ input { font:inherit; color:inherit; }
   padding:24px; max-width:400px; width:90%; text-align:center;
 }
 .cardLvlBtn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+/* Resources */
+.resources-block {
+  background:var(--bg2); border:1px solid var(--bg3);
+  border-radius:var(--radius); margin-bottom:16px; overflow:hidden;
+}
+.resources-header {
+  padding:12px 16px; cursor:pointer; user-select:none;
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:14px; font-weight:600;
+}
+.resources-header:hover { background:var(--bg3); }
+.resources-header .chev { transition:transform 0.2s; font-size:12px; color:var(--text2); }
+.resources-block.open .resources-header .chev { transform:rotate(90deg); }
+.resources-block .resources-list { display:none; padding:0 12px 12px; }
+.resources-block.open .resources-list { display:block; }
+.resources-list { display:flex; flex-direction:column; gap:8px; }
+.resource-item {
+  display:flex; gap:10px; padding:10px 12px;
+  background:var(--bg); border:1px solid var(--bg3); border-radius:8px;
+  text-decoration:none; color:var(--text); transition:all 0.15s;
+  align-items:flex-start;
+}
+.resource-item:hover { border-color:var(--accent); transform:translateX(2px); }
+.resource-icon { font-size:18px; flex-shrink:0; line-height:1.3; }
+.resource-body { display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
+.resource-title { font-weight:500; font-size:14px; }
+.resource-desc { font-size:12px; color:var(--text2); line-height:1.4; }
+.resource-tags { display:flex; gap:6px; margin-top:4px; flex-wrap:wrap; }
+.resource-tag {
+  font-size:10px; padding:2px 6px; border-radius:4px;
+  background:var(--bg3); color:var(--text2); text-transform:uppercase; letter-spacing:0.4px;
+}
+.resource-tag.lvl-1 { background:rgba(0,184,148,0.15); color:var(--green); }
+.resource-tag.lvl-2 { background:rgba(253,203,110,0.15); color:var(--yellow); }
+.resource-tag.lvl-3 { background:rgba(225,112,85,0.15); color:var(--red); }
+.resources-list.compact .resource-desc { display:none; }
+
+/* Review recommendations */
+.review-rec {
+  margin-top:12px; padding:12px; background:rgba(108,92,231,0.08);
+  border-left:3px solid var(--accent); border-radius:8px;
+}
+.review-rec-title { font-size:13px; font-weight:600; margin-bottom:8px; color:var(--accent2); }
 .share-text {
   width:100%; padding:12px; border:1px solid var(--bg3); border-radius:8px;
   background:var(--bg); color:var(--text); font:inherit; font-size:13px;
@@ -1318,34 +1362,6 @@ const TOPICS = [
     {q:'Claude Code для подготовки к собеседованиям',a:'<b>Как использовать:</b>\n\n• "Задай мне 10 вопросов по Spring Boot 3 для senior-уровня"\n• "Объясни как работает HashMap на уровне собеседования"\n• "Напиши задачу по live coding на тему Stream API и проверь моё решение"\n• "Проведи mock-собеседование по Java Core, задавай по одному вопросу"\n• "Разбери мой код и скажи что спросили бы на code review"\n\nClaude может выступать как интервьюер, ревьюер и ментор.',hot:1,lvl:2},
   ]},
 
-  { id:'links', icon:'&#128279;', name:'Ресурсы', data: [
-    {s:'Java Core и JVM'},
-    {q:'Книги по Java',a:'• <b>"Java. Полное Руководство"</b>, Герберт Шилдт — классика для начинающих\n• <b>"Java. Библиотека профессионала"</b>, Хорстманн — глубокое погружение\n• <b>"Effective Java"</b>, Joshua Bloch — best practices (обязательна!)\n• <b>"Java Concurrency in Practice"</b>, Brian Goetz — многопоточность\n• <b>"Java Performance"</b>, Scott Oaks — оптимизация\n\nВсе актуальны для Java 17/21.',hot:1,lvl:1},
-    {q:'Онлайн-курсы Java',a:'• <b>JavaRush</b> — интерактивное обучение с нуля (javarush.ru)\n• <b>JetBrains Academy</b> — Java Track (academy.jetbrains.com)\n• <b>Яндекс Практикум</b> — Java-разработчик (practicum.yandex.ru)\n• <b>Baeldung</b> — лучшие туториалы по Spring/Java (baeldung.com)\n• <b>Jenkov</b> — глубокие туториалы по concurrency (jenkov.com)',lvl:1},
-    {q:'Видео: Java Concurrency',a:'• <b>Jenkov</b>: Java Concurrency playlist — полный курс многопоточности\n• <b>Дмитрий Чуйко</b>: CompletableFuture — практическое применение\n• <b>Java 21 Virtual Threads</b> — обзор Project Loom\n• <b>Алексей Шипилёв</b>: Java Memory Model — глубокий разбор JMM\n\nКонференции: JOKER, JPOINT — лучшие доклады по Java на русском.',lvl:2},
-    {q:'Документация и спецификации',a:'• Oracle Java Tutorials — docs.oracle.com/javase/tutorial/\n• Java Language Specification — docs.oracle.com/javase/specs/\n• JEP Index (новые фичи) — openjdk.org/jeps/\n• Java API Reference — docs.oracle.com/en/java/javase/21/docs/api/',lvl:2},
-    {s:'Spring Ecosystem'},
-    {q:'Spring — книги и курсы',a:'• <b>"Spring in Action"</b>, Craig Walls — основы Spring\n• <b>"Spring Security in Action"</b>, Laurentiu Spilca — безопасность\n• <b>Spring Guides</b> — spring.io/guides (официальные туториалы)\n• <b>Baeldung Spring</b> — baeldung.com/spring-tutorial\n• <b>Spring Boot Reference</b> — docs.spring.io/spring-boot/docs/current/reference/',lvl:2},
-    {q:'Spring Security и OAuth',a:'• Spring Security Architecture — spring.io/guides/topicals/spring-security-architecture/\n• Spring Boot and OAuth2 — spring.io/guides/tutorials/spring-boot-oauth2/\n• <b>"OAuth 2 in Action"</b>, Justin Richer — глубокое погружение в OAuth\n• <b>"Microservices Security in Action"</b> — безопасность микросервисов\n• JWT Introduction — jwt.io/introduction/\n• Keycloak Documentation — keycloak.org/documentation.html',lvl:2},
-    {s:'Базы данных'},
-    {q:'SQL и PostgreSQL — ресурсы',a:'• <b>PostgreSQL Official Docs</b> — postgresql.org/docs/\n• <b>"SQL Performance Explained"</b> — sql-performance-explained.com\n• <b>pgexercises.com</b> — практика SQL\n• <b>"Use The Index, Luke"</b> — use-the-index-luke.com (индексы)\n• <b>Explain Visualizer</b> — explain.dalibo.com (визуализация EXPLAIN)',lvl:2},
-    {q:'Hibernate и JPA — ресурсы',a:'• <b>Vlad Mihalcea</b> — vladmihalcea.com/tutorials/hibernate (лучший блог по Hibernate)\n• <b>"High-Performance Java Persistence"</b> — книга Vlad Mihalcea\n• <b>Thorben Janssen</b> — thorben-janssen.com (JPA tutorials)\n• <b>Baeldung JPA</b> — baeldung.com/learn-jpa-hibernate\n• <b>Hibernate ORM User Guide</b> — docs.jboss.org/hibernate/orm/',hot:1,lvl:2},
-    {s:'Архитектура и DDD'},
-    {q:'DDD и микросервисы — книги',a:'• <b>"Domain-Driven Design"</b>, Eric Evans — оригинал, библия DDD\n• <b>"Domain-Driven Design Distilled"</b>, Vaughn Vernon — краткая версия\n• <b>"Microservices Patterns"</b>, Chris Richardson — паттерны микросервисов\n• <b>"Clean Architecture"</b>, Robert Martin — чистая архитектура\n• <b>"Monolith to Microservices"</b>, Sam Newman — миграция\n• <b>"Building Event-Driven Microservices"</b>, Adam Bellemare',hot:1,lvl:2},
-    {q:'Архитектура — онлайн',a:'• <b>microservices.io/patterns</b> — каталог паттернов Chris Richardson\n• <b>System Design Primer</b> — github.com/donnemartin/system-design-primer\n• <b>Martin Fowler</b> — martinfowler.com (CQRS, Event Sourcing, Refactoring)\n• <b>Herberto Graca</b> — Ports & Adapters — herbertograca.com\n• <b>DDD Community</b> — dddcommunity.org\n• <b>Bounded Context Canvas</b> — github.com/ddd-crew/bounded-context-canvas',lvl:2},
-    {s:'Kafka и Event Streaming'},
-    {q:'Kafka — ресурсы',a:'• <b>Apache Kafka Documentation</b> — kafka.apache.org/documentation/\n• <b>Confluent Developer</b> — developer.confluent.io (курсы, туториалы)\n• <b>"Kafka: The Definitive Guide"</b> — O\'Reilly\n• <b>Kafka Streams in Action</b> — Manning\n• <b>Spring Kafka Reference</b> — docs.spring.io/spring-kafka/',lvl:2},
-    {s:'DevOps и Observability'},
-    {q:'Docker и Kubernetes — ресурсы',a:'• <b>Docker Docs</b> — docs.docker.com\n• <b>Kubernetes Docs</b> — kubernetes.io/docs/\n• <b>"Kubernetes in Action"</b>, Marko Luksa — подробная книга\n• <b>Play with Kubernetes</b> — labs.play-with-k8s.com (практика в браузере)\n• <b>Kubernetes the Hard Way</b> — github.com/kelseyhightower/kubernetes-the-hard-way',lvl:2},
-    {q:'Observability — ресурсы',a:'• <b>OpenTelemetry Docs</b> — opentelemetry.io/docs/\n• <b>Prometheus Docs</b> — prometheus.io/docs/\n• <b>Grafana Tutorials</b> — grafana.com/tutorials/\n• <b>Jaeger Tracing</b> — jaegertracing.io/docs/\n• <b>ELK/OpenSearch</b> — opensearch.org/docs/',lvl:2},
-    {s:'Алгоритмы и Live Coding'},
-    {q:'Алгоритмы — ресурсы для подготовки',a:'• <b>LeetCode</b> — leetcode.com (главная платформа, задачи по сложности)\n• <b>NeetCode</b> — neetcode.io (структурированный roadmap)\n• <b>"Grokking Algorithms"</b> — наглядная книга для начинающих\n• <b>Codeforces</b> — codeforces.com (соревнования)\n• <b>HackerRank</b> — hackerrank.com (Java-задачи)\n• <b>Visualgo</b> — visualgo.net (визуализация алгоритмов)',hot:1,lvl:2},
-    {s:'Конференции (русскоязычные)'},
-    {q:'Конференции и доклады',a:'• <b>JOKER</b> — jokerconf.com (Java-конференция)\n• <b>JPOINT</b> — jpoint.ru (Java-конференция)\n• <b>Habr.com</b> — habr.com (технические статьи на русском)\n• <b>HighLoad++</b> — highload.ru (высоконагруженные системы)\n\nМногие доклады доступны на YouTube бесплатно.\nОсобенно полезны: доклады по Virtual Threads, Spring Boot 3, Kafka, DDD.',lvl:2},
-    {s:'Общие ресурсы'},
-    {q:'Подготовка к собеседованиям — общее',a:'• <b>Interviewing.io</b> — mock interviews\n• <b>Pramp</b> — peer-to-peer mock interviews\n• <b>Glassdoor</b> — вопросы с реальных собеседований\n• <b>GitHub: awesome-java</b> — curated list Java ресурсов\n• <b>Roadmap.sh/java</b> — roadmap Java-разработчика\n\n<b>Совет:</b> готовься по конкретному стеку вакансии, а не "всё подряд".',lvl:2},
-  ]},
-
   { id:'security', icon:'&#128274;', name:'Безопасность', data: [
     {s:'Аутентификация и авторизация'},
     {q:'Аутентификация vs авторизация',a:'<b>Аутентификация</b> — КТО ты? Проверка личности.\n• Логин/пароль\n• JWT токен\n• OAuth 2.0\n• Сертификат (mTLS)\n\n<b>Авторизация</b> — ЧТО можешь? Проверка прав.\n• Роли (RBAC): ADMIN, USER, MANAGER\n• Permissions: PAYMENT_READ, PAYMENT_WRITE\n• Правила: "менеджер видит только платежи своего отдела"\n\n<b>Порядок:</b> сначала аутентификация, потом авторизация.\n\n<b>В Spring Security:</b>\n<pre><code>HTTP Request\n  -> AuthenticationFilter (проверяет токен/пароль)\n  -> SecurityContextHolder.setAuthentication()\n  -> AuthorizationFilter\n     requestMatchers("/admin/**").hasRole("ADMIN")\n     @PreAuthorize("hasAuthority("PAYMENT_READ")")\n  -> Controller</code></pre>\n\n<b>Пример @PreAuthorize:</b>\n<pre><code>@PreAuthorize("hasRole("ADMIN") or #merchantId == authentication.principal.merchantId")\npublic List&lt;Payment&gt; getPayments(Long merchantId) { ... }\n// ADMIN видит все, мерчант — только свои</code></pre>\n\n<b>На собесе:</b> как реализована авторизация в вашем проекте? (JWT + roles в claims + @PreAuthorize)',lvl:1,hot:1},
@@ -1407,7 +1423,185 @@ const TOPICS = [
     {s:'MongoDB'},
     {q:'MongoDB — основы',a:'Document-oriented NoSQL (JSON/BSON документы).\n\n<b>Концепции:</b>\n• Database → Collection (аналог таблицы) → Document\n• Нет схемы (schema-less), но можно задать validation\n• _id — автоматический ObjectId\n\n<b>Когда:</b>\n• Гибкая схема данных\n• Быстрая разработка прототипов\n• Полуструктурированные данные\n• Горизонтальное масштабирование\n\n<b>Когда НЕ:</b> сложные JOIN, ACID транзакции (хотя с 4.0 есть multi-doc transactions).',lvl:1},
   ]},
+  { id:'links', icon:'&#128279;', name:'Ресурсы', data: [] },
 ];
+
+// ============================================================
+// TOPIC RESOURCES — учебные материалы, привязанные к темам
+// kinds: book | docs | course | blog | video | practice
+// ============================================================
+const TOPIC_RESOURCES = {
+  core: [
+    {t:'Effective Java (Joshua Bloch)', u:'https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/', k:'book', l:2, d:'Обязательная к прочтению — best practices'},
+    {t:'Java Concurrency in Practice', u:'https://jcip.net/', k:'book', l:3, d:'Brian Goetz — многопоточность'},
+    {t:'Java Performance (Scott Oaks)', u:'https://www.oreilly.com/library/view/java-performance-2nd/9781492056102/', k:'book', l:3, d:'Оптимизация и GC'},
+    {t:'Oracle Java Tutorials', u:'https://docs.oracle.com/javase/tutorial/', k:'docs', l:1, d:'Официальные туториалы'},
+    {t:'Java Language Specification', u:'https://docs.oracle.com/javase/specs/', k:'docs', l:3, d:'Спецификация языка'},
+    {t:'JEP Index (новые фичи)', u:'https://openjdk.org/jeps/', k:'docs', l:2, d:'Все Java Enhancement Proposals'},
+    {t:'Java API Reference (21)', u:'https://docs.oracle.com/en/java/javase/21/docs/api/', k:'docs', l:1, d:'Документация стандартной библиотеки'},
+    {t:'JavaRush', u:'https://javarush.com/', k:'course', l:1, d:'Интерактивное обучение с нуля'},
+    {t:'Baeldung Java', u:'https://www.baeldung.com/category/java/', k:'blog', l:2, d:'Практические туториалы'},
+    {t:'Алексей Шипилёв — JMM', u:'https://shipilev.net/', k:'video', l:3, d:'Глубокий разбор Java Memory Model'}
+  ],
+  collections: [
+    {t:'Java Collections — Oracle', u:'https://docs.oracle.com/javase/tutorial/collections/', k:'docs', l:1},
+    {t:'Baeldung: Java Collections', u:'https://www.baeldung.com/java-collections', k:'blog', l:2},
+    {t:'Jenkov: Java Collections', u:'https://jenkov.com/tutorials/java-collections/index.html', k:'blog', l:2, d:'Глубокие разборы'}
+  ],
+  streams: [
+    {t:'Stream API — Oracle', u:'https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html', k:'docs', l:1},
+    {t:'Baeldung: Java Streams', u:'https://www.baeldung.com/java-8-streams', k:'blog', l:1},
+    {t:'Collectors Tutorial', u:'https://www.baeldung.com/java-8-collectors', k:'blog', l:2, d:'groupingBy, partitioningBy и другие'}
+  ],
+  threads: [
+    {t:'Java Concurrency in Practice', u:'https://jcip.net/', k:'book', l:3, d:'Brian Goetz — классика'},
+    {t:'Jenkov: Java Concurrency', u:'https://jenkov.com/tutorials/java-concurrency/index.html', k:'blog', l:2, d:'Полный курс многопоточности'},
+    {t:'Project Loom / Virtual Threads', u:'https://openjdk.org/projects/loom/', k:'docs', l:3},
+    {t:'Baeldung: CompletableFuture', u:'https://www.baeldung.com/java-completablefuture', k:'blog', l:2},
+    {t:'Shipilev — JMM Pragmatics', u:'https://shipilev.net/blog/2014/jmm-pragmatics/', k:'blog', l:3, d:'Всё про Java Memory Model'}
+  ],
+  sql: [
+    {t:'PostgreSQL Official Docs', u:'https://www.postgresql.org/docs/', k:'docs', l:2},
+    {t:'SQL Performance Explained', u:'https://sql-performance-explained.com/', k:'book', l:2, d:'Markus Winand — обязательна'},
+    {t:'Use The Index, Luke!', u:'https://use-the-index-luke.com/', k:'blog', l:2, d:'Всё про индексы'},
+    {t:'pgexercises.com', u:'https://pgexercises.com/', k:'practice', l:1, d:'Практика SQL в браузере'},
+    {t:'Explain Dalibo', u:'https://explain.dalibo.com/', k:'practice', l:2, d:'Визуализация EXPLAIN plan'},
+    {t:'LeetCode Database', u:'https://leetcode.com/problemset/database/', k:'practice', l:2}
+  ],
+  jpa: [
+    {t:'Vlad Mihalcea Blog', u:'https://vladmihalcea.com/tutorials/hibernate/', k:'blog', l:3, d:'Лучший блог по Hibernate'},
+    {t:'High-Performance Java Persistence', u:'https://vladmihalcea.com/books/high-performance-java-persistence/', k:'book', l:3, d:'Vlad Mihalcea'},
+    {t:'Thorben Janssen Blog', u:'https://thorben-janssen.com/', k:'blog', l:2, d:'JPA / Hibernate туториалы'},
+    {t:'Baeldung JPA', u:'https://www.baeldung.com/learn-jpa-hibernate', k:'blog', l:2},
+    {t:'Hibernate ORM User Guide', u:'https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html', k:'docs', l:2}
+  ],
+  spring: [
+    {t:'Spring in Action (Craig Walls)', u:'https://www.manning.com/books/spring-in-action-sixth-edition', k:'book', l:2, d:'Основы Spring'},
+    {t:'Spring Guides', u:'https://spring.io/guides', k:'docs', l:1, d:'Официальные туториалы'},
+    {t:'Spring Boot Reference', u:'https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/', k:'docs', l:2},
+    {t:'Baeldung Spring', u:'https://www.baeldung.com/spring-tutorial', k:'blog', l:2, d:'Лучшие туториалы по Spring'},
+    {t:'Spring Academy', u:'https://spring.academy/', k:'course', l:2, d:'Официальные курсы VMware'}
+  ],
+  security: [
+    {t:'Spring Security in Action', u:'https://www.manning.com/books/spring-security-in-action-second-edition', k:'book', l:2, d:'Laurentiu Spilca'},
+    {t:'Spring Security Architecture', u:'https://spring.io/guides/topicals/spring-security-architecture', k:'docs', l:2},
+    {t:'OAuth 2 in Action', u:'https://www.manning.com/books/oauth-2-in-action', k:'book', l:3, d:'Justin Richer'},
+    {t:'JWT Introduction', u:'https://jwt.io/introduction', k:'docs', l:1},
+    {t:'Keycloak Documentation', u:'https://www.keycloak.org/documentation', k:'docs', l:2},
+    {t:'OWASP Top 10', u:'https://owasp.org/www-project-top-ten/', k:'docs', l:2, d:'Основные уязвимости'}
+  ],
+  kafka: [
+    {t:'Kafka: The Definitive Guide', u:'https://www.confluent.io/resources/kafka-the-definitive-guide-v2/', k:'book', l:2, d:'Бесплатная от Confluent'},
+    {t:'Confluent Developer', u:'https://developer.confluent.io/', k:'course', l:2, d:'Курсы и туториалы'},
+    {t:'Kafka Documentation', u:'https://kafka.apache.org/documentation/', k:'docs', l:2},
+    {t:'Spring Kafka Reference', u:'https://docs.spring.io/spring-kafka/reference/', k:'docs', l:2}
+  ],
+  arch: [
+    {t:'Domain-Driven Design (Evans)', u:'https://www.oreilly.com/library/view/domain-driven-design-tackling/0321125215/', k:'book', l:3, d:'Оригинал, библия DDD'},
+    {t:'DDD Distilled (Vernon)', u:'https://www.oreilly.com/library/view/domain-driven-design-distilled/9780134434964/', k:'book', l:2, d:'Краткая версия'},
+    {t:'Microservices Patterns', u:'https://microservices.io/book', k:'book', l:3, d:'Chris Richardson'},
+    {t:'Clean Architecture', u:'https://www.oreilly.com/library/view/clean-architecture-a/9780134494272/', k:'book', l:2, d:'Robert Martin'},
+    {t:'microservices.io/patterns', u:'https://microservices.io/patterns/', k:'blog', l:2, d:'Каталог паттернов'},
+    {t:'System Design Primer', u:'https://github.com/donnemartin/system-design-primer', k:'docs', l:2, d:'GitHub — structured learning'},
+    {t:'Martin Fowler', u:'https://martinfowler.com/', k:'blog', l:3, d:'CQRS, Event Sourcing, Refactoring'}
+  ],
+  patterns: [
+    {t:'Refactoring Guru (Java)', u:'https://refactoring.guru/design-patterns/java', k:'blog', l:1, d:'Визуальные объяснения с примерами на Java'},
+    {t:'Head First Design Patterns', u:'https://www.oreilly.com/library/view/head-first-design/9781492077992/', k:'book', l:1, d:'Для новичков'},
+    {t:'SourceMaking Patterns', u:'https://sourcemaking.com/design_patterns', k:'blog', l:2},
+    {t:'GoF Design Patterns', u:'https://en.wikipedia.org/wiki/Design_Patterns', k:'book', l:3, d:'Классика — Gang of Four'}
+  ],
+  test: [
+    {t:'JUnit 5 User Guide', u:'https://junit.org/junit5/docs/current/user-guide/', k:'docs', l:1},
+    {t:'Mockito Documentation', u:'https://site.mockito.org/', k:'docs', l:1},
+    {t:'Testcontainers', u:'https://www.testcontainers.org/', k:'docs', l:2, d:'Integration tests with Docker'},
+    {t:'Baeldung Testing', u:'https://www.baeldung.com/category/testing/', k:'blog', l:2}
+  ],
+  devops: [
+    {t:'Docker Docs', u:'https://docs.docker.com/', k:'docs', l:1},
+    {t:'Kubernetes Docs', u:'https://kubernetes.io/docs/home/', k:'docs', l:2},
+    {t:'Kubernetes in Action', u:'https://www.manning.com/books/kubernetes-in-action-second-edition', k:'book', l:2, d:'Marko Luksa'},
+    {t:'Play with Kubernetes', u:'https://labs.play-with-k8s.com/', k:'practice', l:1, d:'Практика в браузере'},
+    {t:'Kubernetes the Hard Way', u:'https://github.com/kelseyhightower/kubernetes-the-hard-way', k:'practice', l:3},
+    {t:'OpenTelemetry Docs', u:'https://opentelemetry.io/docs/', k:'docs', l:2},
+    {t:'Prometheus Docs', u:'https://prometheus.io/docs/introduction/overview/', k:'docs', l:2},
+    {t:'Grafana Tutorials', u:'https://grafana.com/tutorials/', k:'course', l:1}
+  ],
+  algo: [
+    {t:'LeetCode', u:'https://leetcode.com/', k:'practice', l:2, d:'Главная платформа — задачи по уровням'},
+    {t:'NeetCode 150', u:'https://neetcode.io/practice', k:'practice', l:2, d:'Структурированный roadmap'},
+    {t:'Grokking Algorithms', u:'https://www.manning.com/books/grokking-algorithms', k:'book', l:1, d:'Наглядная книга для начинающих'},
+    {t:'Visualgo', u:'https://visualgo.net/', k:'practice', l:1, d:'Визуализация алгоритмов'},
+    {t:'CLRS (Cormen)', u:'https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/', k:'book', l:3, d:'Академическая классика'},
+    {t:'Codeforces', u:'https://codeforces.com/', k:'practice', l:3, d:'Соревнования'}
+  ],
+  live: [
+    {t:'LeetCode Top Interview 150', u:'https://leetcode.com/studyplan/top-interview-150/', k:'practice', l:2},
+    {t:'HackerRank Java', u:'https://www.hackerrank.com/domains/java', k:'practice', l:1},
+    {t:'Cracking the Coding Interview', u:'https://www.crackingthecodinginterview.com/', k:'book', l:2}
+  ],
+  nosql: [
+    {t:'MongoDB Manual', u:'https://www.mongodb.com/docs/manual/', k:'docs', l:1},
+    {t:'Redis Documentation', u:'https://redis.io/docs/', k:'docs', l:1},
+    {t:'OpenSearch Docs', u:'https://opensearch.org/docs/', k:'docs', l:2},
+    {t:'MongoDB University', u:'https://learn.mongodb.com/', k:'course', l:1, d:'Бесплатные курсы'}
+  ],
+  protocols: [
+    {t:'HTTP MDN', u:'https://developer.mozilla.org/en-US/docs/Web/HTTP', k:'docs', l:1},
+    {t:'gRPC Documentation', u:'https://grpc.io/docs/', k:'docs', l:2},
+    {t:'High Performance Browser Networking', u:'https://hpbn.co/', k:'book', l:3, d:'Ilya Grigorik — бесплатная книга'}
+  ],
+  git: [
+    {t:'Pro Git Book', u:'https://git-scm.com/book/en/v2', k:'book', l:1, d:'Бесплатная, официальная'},
+    {t:'Oh Shit, Git!', u:'https://ohshitgit.com/', k:'blog', l:1, d:'Что делать когда всё сломалось'},
+    {t:'Learn Git Branching', u:'https://learngitbranching.js.org/', k:'practice', l:1, d:'Интерактивно в браузере'}
+  ],
+  kotlin: [
+    {t:'Kotlin Docs', u:'https://kotlinlang.org/docs/home.html', k:'docs', l:1},
+    {t:'Kotlin by Example', u:'https://play.kotlinlang.org/byExample/overview', k:'practice', l:1},
+    {t:'Kotlin in Action', u:'https://www.manning.com/books/kotlin-in-action', k:'book', l:2}
+  ]
+};
+
+// Общие ресурсы (подготовка к собеседованиям)
+const GENERAL_RESOURCES = [
+  {t:'Interviewing.io', u:'https://interviewing.io/', k:'practice', l:2, d:'Mock interviews'},
+  {t:'Pramp', u:'https://www.pramp.com/', k:'practice', l:2, d:'Peer-to-peer mock interviews'},
+  {t:'Glassdoor — вопросы', u:'https://www.glassdoor.com/Interview/index.htm', k:'blog', l:1, d:'Реальные собеседования по компаниям'},
+  {t:'Awesome Java (GitHub)', u:'https://github.com/akullpp/awesome-java', k:'docs', l:1, d:'Curated list библиотек'},
+  {t:'Roadmap.sh/java', u:'https://roadmap.sh/java', k:'docs', l:1, d:'Roadmap Java-разработчика'},
+  {t:'JOKER Conf', u:'https://jokerconf.com/', k:'video', l:2, d:'Крупнейшая Java-конференция (YouTube)'},
+  {t:'JPOINT', u:'https://jpoint.ru/', k:'video', l:2},
+  {t:'Habr — Java hub', u:'https://habr.com/ru/hub/java/', k:'blog', l:1}
+];
+
+const RESOURCE_KIND_LABELS = {
+  book: {icon:'\uD83D\uDCD6', label:'Книга'},
+  docs: {icon:'\uD83D\uDCDA', label:'Документация'},
+  course: {icon:'\uD83C\uDF93', label:'Курс'},
+  blog: {icon:'\uD83D\uDCDD', label:'Блог/туториал'},
+  video: {icon:'\uD83C\uDFA5', label:'Видео'},
+  practice: {icon:'\uD83D\uDCAA', label:'Практика'}
+};
+
+function getTopicResources(topicId) { return TOPIC_RESOURCES[topicId] || []; }
+
+function renderResourceList(resources, compact) {
+  if (!resources || resources.length === 0) return '';
+  var html = '<div class="resources-list' + (compact ? ' compact' : '') + '">';
+  resources.forEach(function(r) {
+    var meta = RESOURCE_KIND_LABELS[r.k] || {icon:'\uD83D\uDD17', label:r.k};
+    html += '<a class="resource-item" href="' + r.u + '" target="_blank" rel="noopener">';
+    html += '<span class="resource-icon">' + meta.icon + '</span>';
+    html += '<span class="resource-body">';
+    html += '<span class="resource-title">' + r.t + '</span>';
+    if (r.d) html += '<span class="resource-desc">' + r.d + '</span>';
+    html += '<span class="resource-tags"><span class="resource-tag lvl-' + (r.l||1) + '">L' + (r.l||1) + '</span><span class="resource-tag">' + meta.label + '</span></span>';
+    html += '</span></a>';
+  });
+  html += '</div>';
+  return html;
+}
 
 // ============================================================
 // QUIZ BANK (test mode with options)
@@ -1660,6 +1854,8 @@ let filterLevel = 0;
 let quizQueue = [];
 let quizIndex = 0;
 let sessionStartTime = Date.now();
+let resourceFilter = 'all';
+let resourceLevelFilter = 0;
 
 function loadState() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {statuses:{},lastTopic:'core'}; }
@@ -1926,6 +2122,7 @@ function renderSidebar() {
   html += `<button class="nav-item ${currentTopic==='bookmarks'?'active':''}" onclick="navigate('bookmarks')">
     <span class="nav-icon">&#128278;</span>Закладки</button>`;
   TOPICS.forEach(t => {
+    if (t.id === 'links') return;
     const s = getTopicStats(t);
     const pct = s.total ? Math.round((s.known/s.total)*100) : 0;
     html += `<button class="nav-item ${currentTopic===t.id?'active':''}" onclick="navigate('${t.id}')">
@@ -1934,6 +2131,14 @@ function renderSidebar() {
       <div class="nav-progress"><div class="nav-progress-fill" style="width:${pct}%"></div></div>
     </button>`;
   });
+  // Resources — separator + at the end
+  html += '<div style="padding:8px 20px 4px;font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px">Дополнительно</div>';
+  var linksTopic = TOPICS.find(function(t){return t.id==='links';});
+  if (linksTopic) {
+    html += `<button class="nav-item ${currentTopic==='links'?'active':''}" onclick="navigate('links')">
+      <span class="nav-icon">${linksTopic.icon}</span>${linksTopic.name}
+    </button>`;
+  }
   html += `<div style="padding:16px 20px;border-top:1px solid var(--bg3);margin-top:12px">
     <button class="topbar-btn" style="width:100%;justify-content:center" onclick="toggleTheme()">&#9790; Тема</button>
     <button class="topbar-btn" style="width:100%;justify-content:center;margin-top:8px" onclick="exportProgress()">&#128229; Экспорт</button>
@@ -1948,6 +2153,7 @@ function renderMain() {
   trackStudyTime();
   if (currentTopic === 'dashboard') { renderDashboard(main); return; }
   if (currentTopic === 'bookmarks') { renderBookmarks(main); return; }
+  if (currentTopic === 'links') { renderResourcesHub(main); return; }
   const topic = TOPICS.find(t => t.id === currentTopic);
   if (!topic) return;
 
@@ -1972,6 +2178,17 @@ function renderMain() {
   </div>`;
 
   html += `<div class="progress-bar"><div class="seg-green" style="width:${pctKnown}%"></div><div class="seg-yellow" style="width:${pctLearning}%"></div></div>`;
+
+  // Resources block for this topic (always rendered, collapsed by default)
+  var topicResources = getTopicResources(topic.id);
+  if (topicResources.length > 0) {
+    html += '<div class="resources-block" id="topicResources">';
+    html += '<div class="resources-header" onclick="this.parentElement.classList.toggle(\'open\')">';
+    html += '<span>\uD83D\uDCDA Учебные материалы (' + topicResources.length + ')</span>';
+    html += '<span class="chev">\u25B6</span></div>';
+    html += renderResourceList(topicResources);
+    html += '</div>';
+  }
 
   html += `<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="topbar-btn" onclick="openCardEditor('${topic.id}')" style="background:var(--accent);color:#fff;border-color:var(--accent)">&#10133; Добавить свою карточку</button></div>`;
 
@@ -2052,6 +2269,59 @@ function renderBookmarks(main) {
   main.innerHTML = html;
 }
 
+function renderResourcesHub(main) {
+  var html = '<h2 style="margin-bottom:8px">&#128279; Ресурсы</h2>';
+  html += '<p style="color:var(--text2);margin-bottom:16px;font-size:14px">Учебные материалы по всем темам. Книги, документация, туториалы, практика.</p>';
+
+  // Filters
+  html += '<div class="topbar-filters" style="margin-bottom:16px;flex-wrap:wrap;gap:6px">';
+  html += '<button class="topbar-btn ' + (resourceFilter === 'all' ? 'active' : '') + '" onclick="setResourceFilter(\'all\')">Все</button>';
+  ['book','docs','course','blog','video','practice'].forEach(function(k) {
+    var meta = RESOURCE_KIND_LABELS[k];
+    html += '<button class="topbar-btn ' + (resourceFilter === k ? 'active' : '') + '" onclick="setResourceFilter(\'' + k + '\')">' + meta.icon + ' ' + meta.label + '</button>';
+  });
+  html += '<button class="topbar-btn ' + (resourceLevelFilter === 1 ? 'active' : '') + '" onclick="setResourceLevel(1)">L1</button>';
+  html += '<button class="topbar-btn ' + (resourceLevelFilter === 2 ? 'active' : '') + '" onclick="setResourceLevel(2)">L2</button>';
+  html += '<button class="topbar-btn ' + (resourceLevelFilter === 3 ? 'active' : '') + '" onclick="setResourceLevel(3)">L3</button>';
+  html += '</div>';
+
+  function filterResources(list) {
+    return list.filter(function(r) {
+      if (resourceFilter !== 'all' && r.k !== resourceFilter) return false;
+      if (resourceLevelFilter && (r.l || 1) !== resourceLevelFilter) return false;
+      return true;
+    });
+  }
+
+  // Per-topic sections
+  TOPICS.forEach(function(t) {
+    var res = filterResources(getTopicResources(t.id));
+    if (res.length === 0) return;
+    html += '<div class="resources-block open" style="margin-bottom:12px">';
+    html += '<div class="resources-header" onclick="this.parentElement.classList.toggle(\'open\')">';
+    html += '<span>' + t.icon + ' ' + t.name + ' (' + res.length + ')</span>';
+    html += '<span class="chev">\u25B6</span></div>';
+    html += renderResourceList(res);
+    html += '</div>';
+  });
+
+  // General
+  var genRes = filterResources(GENERAL_RESOURCES);
+  if (genRes.length > 0) {
+    html += '<div class="resources-block open" style="margin-bottom:12px">';
+    html += '<div class="resources-header" onclick="this.parentElement.classList.toggle(\'open\')">';
+    html += '<span>&#127919; Подготовка к собеседованиям (' + genRes.length + ')</span>';
+    html += '<span class="chev">\u25B6</span></div>';
+    html += renderResourceList(genRes);
+    html += '</div>';
+  }
+
+  main.innerHTML = html;
+}
+
+function setResourceFilter(f) { resourceFilter = f; renderMain(); }
+function setResourceLevel(l) { resourceLevelFilter = resourceLevelFilter === l ? 0 : l; renderMain(); }
+
 function renderDashboard(main) {
   const all = getAllStats();
   const pctKnown = all.total ? Math.round(all.known/all.total*100) : 0;
@@ -2131,6 +2401,15 @@ function renderDashboard(main) {
       html += '<div class="recommendation-item" onclick="navigate(\'' + w.id + '\')">';
       html += '\u27A1 Подтяните <b>' + w.name + '</b> (' + w.pct + '%)';
       if (relatedNames.length > 0) html += '<br><span style="color:var(--text2);font-size:12px">Связано с: ' + relatedNames.join(', ') + '</span>';
+      var topRes = getTopicResources(w.id).slice(0, 2);
+      if (topRes.length > 0) {
+        html += '<div style="margin-top:6px;font-size:12px;display:flex;gap:8px;flex-wrap:wrap">';
+        topRes.forEach(function(r) {
+          var meta = RESOURCE_KIND_LABELS[r.k] || {icon:'\uD83D\uDD17'};
+          html += '<a href="' + r.u + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--accent2);text-decoration:underline">' + meta.icon + ' ' + r.t + '</a>';
+        });
+        html += '</div>';
+      }
       html += '</div>';
     });
     html += '</div>';
@@ -2172,6 +2451,7 @@ function renderDashboard(main) {
   // Topics
   html += '<h3 style="margin-bottom:12px">По темам</h3>';
   TOPICS.forEach(t => {
+    if (t.id === 'links') return; // Ресурсы — отдельный раздел
     const s = getTopicStats(t);
     const pct = s.total ? Math.round(s.known/s.total*100) : 0;
     var deps = getRelatedTopics(t.id);
@@ -2769,6 +3049,21 @@ function showTestReview(idx) {
     html += '<div class="test-review-explanation"><b>Объяснение:</b><br>' + q.explanation + '</div>';
   }
 
+  // Если ответ неправильный — показать релевантные учебные материалы
+  if (!correct) {
+    var recs = getTopicResources(q.topic);
+    // Приоритет: материалы уровня L<=q.lvl, берём top-4
+    var relevant = recs.filter(function(r){ return (r.l || 1) <= q.lvl; });
+    if (relevant.length === 0) relevant = recs;
+    relevant = relevant.slice(0, 4);
+    if (relevant.length > 0) {
+      html += '<div class="review-rec">';
+      html += '<div class="review-rec-title">\uD83D\uDCA1 Рекомендую изучить</div>';
+      html += renderResourceList(relevant, true);
+      html += '</div>';
+    }
+  }
+
   html += '<div style="display:flex;gap:10px;margin-top:20px">';
   if (prevErr >= 0) html += '<button class="topbar-btn" style="flex:1" onclick="showTestReview('+prevErr+')">\u2190 Предыдущая ошибка</button>';
   html += '<button class="topbar-btn" style="flex:1" onclick="showTestResults()">\u2190 К результатам</button>';
@@ -3260,6 +3555,30 @@ function finishInterview() {
     html += '<details style="margin-top:8px"><summary style="cursor:pointer;color:var(--accent2);font-size:13px">Показать эталон</summary><div style="color:var(--text2);font-size:13px;margin-top:8px;line-height:1.6">' + formatAnswer(oq.item.a) + '</div></details>';
     html += '</div>';
   });
+
+  // Recommendations based on weak topics from this interview
+  if (!ready) {
+    var weakTopicsInInterview = {};
+    interviewState.testQs.forEach(function(tq, i) {
+      var ans = interviewState.testAnswers[i] || [];
+      var ok = ans.length > 0 && ans.length === tq.correct.length;
+      if (ok) { var s1=ans.slice().sort(),s2=tq.correct.slice().sort(); for(var j=0;j<s1.length;j++){if(s1[j]!==s2[j])ok=false;} }
+      if (!ok) weakTopicsInInterview[tq.topic] = (weakTopicsInInterview[tq.topic]||0) + 1;
+    });
+    var weakTopicIds = Object.keys(weakTopicsInInterview).sort(function(a,b){return weakTopicsInInterview[b]-weakTopicsInInterview[a];}).slice(0,3);
+    if (weakTopicIds.length > 0) {
+      html += '<h3 style="margin:20px 0 12px">\uD83D\uDCDA Что подтянуть</h3>';
+      weakTopicIds.forEach(function(tid) {
+        var tObj = TOPICS.find(function(t){return t.id===tid;});
+        var resources = getTopicResources(tid).slice(0, 3);
+        if (resources.length === 0) return;
+        html += '<div class="resources-block open" style="margin-bottom:12px">';
+        html += '<div class="resources-header"><span>' + (tObj ? tObj.icon + ' ' + tObj.name : tid) + '</span></div>';
+        html += renderResourceList(resources, true);
+        html += '</div>';
+      });
+    }
+  }
 
   html += '<div class="test-results-actions" style="margin-top:20px">';
   html += '<button onclick="shareInterviewResult(' + overallPct + ',' + (interviewState.senior?1:0) + ')">&#128227; Поделиться</button>';
